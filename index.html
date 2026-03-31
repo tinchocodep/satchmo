@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Panificadora Satchmo — Proveedor industrial de panificados para gastronomía. +20 años abasteciendo hamburgueserías, cafeterías, restaurantes y food trucks.">
+<title>Satchmo — Panificados Industriales</title>
+<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --fg: #141210;
+  --muted: #8C8680;
+  --faint: #C9C3BB;
+  --line: #E8E4DE;
+  --accent: #B8893A;
+  --white: #FFFFFF;
+  --serif: 'Instrument Serif', 'Georgia', serif;
+  --sans: 'Geist', -apple-system, 'Helvetica Neue', sans-serif;
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-smooth: cubic-bezier(.25,.46,.45,.94);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-overflow-scrolling:touch}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;overflow-x:hidden;text-rendering:optimizeLegibility}
+::selection{background:var(--accent);color:var(--white)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* --- NAV --- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:.5rem 3rem;background:transparent;will-change:padding,background;transition:padding .4s var(--ease-out),background .4s var(--ease-smooth),border .4s var(--ease-smooth),backdrop-filter .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(250,250,248,.96);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border-bottom:1px solid var(--line);padding:.5rem 3rem}
+.logo{display:flex;align-items:center}
+.logo img{height:160px;width:auto;transition:height .4s var(--ease-out)}
+nav.scrolled .logo img{height:60px}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{font-size:.8rem;color:var(--muted);letter-spacing:.06em;transition:color .3s var(--ease-smooth);position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-.3rem;left:0;width:0;height:1px;background:var(--fg);transition:width .4s var(--ease-out)}
+.nav-links a:hover{color:var(--fg)}
+.nav-links a:hover::after{width:100%}
+.nav-contact{font-size:.75rem!important;letter-spacing:.1em!important;text-transform:uppercase;color:var(--fg)!important;padding:.55rem 1.3rem;border:1px solid var(--fg);transition:all .35s var(--ease-out)!important}
+.nav-contact::after{display:none!important}
+.nav-contact:hover{background:var(--fg);color:var(--bg)!important;transform:translateY(-1px);box-shadow:0 4px 12px rgba(20,18,16,.15)}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
+.menu-btn span{display:block;width:20px;height:1px;background:var(--fg);margin:5px 0;transition:all .3s var(--ease-out)}
+
+/* --- HERO --- */
+.hero{height:100vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-text{display:flex;flex-direction:column;justify-content:flex-end;padding:0 4rem 6rem 3rem}
+.hero-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem;opacity:0;transform:translateY(20px);animation:rise .8s .3s var(--ease-out) forwards}
+.hero h1{font-family:var(--serif);font-size:clamp(2.4rem,4.5vw,4.5rem);font-weight:400;line-height:1.08;letter-spacing:-.03em;opacity:0;transform:translateY(30px);animation:rise .9s .5s var(--ease-out) forwards}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-desc{font-size:1rem;font-weight:300;color:var(--muted);line-height:1.75;max-width:440px;margin-top:1.5rem;opacity:0;transform:translateY(20px);animation:rise .8s .7s var(--ease-out) forwards}
+.hero-cta-row{display:flex;gap:1.5rem;align-items:center;margin-top:2.5rem;opacity:0;transform:translateY(20px);animation:rise .8s .9s var(--ease-out) forwards}
+.hero-btn{display:inline-flex;align-items:center;gap:.5rem;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;padding:.8rem 1.8rem;border:1px solid var(--fg);transition:all .35s var(--ease-out)}
+.hero-btn:hover{background:var(--fg);color:var(--bg);transform:translateY(-2px);box-shadow:0 6px 20px rgba(20,18,16,.12)}
+.hero-btn svg{width:16px;height:16px;fill:currentColor}
+.hero-link{font-size:.8rem;letter-spacing:.08em;color:var(--muted);transition:color .3s var(--ease-smooth)}
+.hero-link:hover{color:var(--fg)}
+
+.hero-img{position:relative;overflow:hidden;opacity:0;animation:fadeIn 1.4s .4s ease forwards;will-change:opacity}
+.hero-img img{width:100%;height:100%;object-fit:cover;will-change:transform;transition:transform 8s linear;animation:slowZoom 20s ease-in-out infinite alternate}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--bg) 0%,transparent 18%);pointer-events:none}
+
+@keyframes slowZoom{from{transform:scale(1)}to{transform:scale(1.06)}}
+
+/* --- DIVIDER --- */
+.divider{border:none;height:1px;background:var(--line);margin:0 3rem}
+
+/* --- NUMBERS BAR --- */
+.numbers{display:grid;grid-template-columns:repeat(3,1fr);padding:4rem 3rem;gap:2rem}
+.number-item{text-align:center}
+.number-val{font-family:var(--serif);font-size:3rem;letter-spacing:-.04em;line-height:1}
+.number-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:.6rem}
+
+/* --- TEXT SECTION --- */
+.text-section{padding:8rem 3rem;max-width:700px}
+.tag{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.text-section h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;line-height:1.2;letter-spacing:-.02em;margin-bottom:1.5rem}
+.text-section p{font-size:1rem;font-weight:300;color:var(--muted);line-height:1.8}
+
+/* --- IMAGE BAND --- */
+.img-band{display:grid;grid-template-columns:1fr 1fr 1fr;height:400px;gap:1px;background:var(--line);overflow:hidden;position:relative;perspective:800px}
+.img-band img{width:100%;height:400px;object-fit:cover;display:block;transition:transform .6s var(--ease-out),filter .6s var(--ease-out)}
+.img-band img:hover{transform:scale(1.05) translateZ(10px);filter:brightness(1.05)}
+
+/* --- DIFF LIST --- */
+.diffs{padding:0 3rem 8rem;max-width:900px}
+.diff-item{display:grid;grid-template-columns:60px 1fr;gap:2rem;padding:2.5rem 0;border-bottom:1px solid var(--line);align-items:start}
+.diff-item:first-child{border-top:1px solid var(--line)}
+.diff-num{font-family:var(--serif);font-size:1.4rem;color:var(--faint);transition:color .4s var(--ease-smooth)}
+.diff-item:hover .diff-num{color:var(--accent)}
+.diff-item h3{font-family:var(--serif);font-size:1.3rem;font-weight:400;margin-bottom:.5rem;letter-spacing:-.01em}
+.diff-item p{font-size:.9rem;font-weight:300;color:var(--muted);line-height:1.7;max-width:500px}
+
+/* --- FULL WIDTH QUOTE (MANGINI) --- */
+.quote-band{background:var(--fg);color:var(--bg);padding:7rem 3rem;text-align:center;position:relative;overflow:hidden}
+.quote-band::before{content:'\201C';position:absolute;top:1rem;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:10rem;color:rgba(255,255,255,.03);line-height:1;pointer-events:none}
+.quote-line{width:40px;height:1px;background:var(--accent);margin:0 auto 2rem}
+.quote-text{font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.2rem);font-weight:400;line-height:1.45;max-width:700px;margin:0 auto 2rem;letter-spacing:-.01em}
+.quote-attr{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2rem}
+.quote-cta{display:inline-flex;align-items:center;gap:1.2rem;margin-top:1.5rem;padding:1rem 2rem;border:1px solid rgba(255,255,255,.12);border-radius:3px;transition:all .4s var(--ease-out);text-decoration:none;color:var(--bg)}
+.quote-cta:hover{border-color:var(--accent);background:rgba(255,255,255,.04);transform:translateY(-2px)}
+.quote-cta-text{text-align:left}
+.quote-cta-label{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.quote-cta-name{font-family:var(--serif);font-size:1.1rem;letter-spacing:-.01em}
+.quote-cta img{height:35px;width:auto;filter:brightness(0) invert(1)}
+.quote-cta .arrow{font-size:.7rem;letter-spacing:.1em;color:var(--accent);transition:letter-spacing .3s var(--ease-out)}
+.quote-cta:hover .arrow{letter-spacing:.2em}
+.quote-stats{display:grid;grid-template-columns:repeat(3,1fr);max-width:600px;margin:0 auto;gap:2rem;border-top:1px solid rgba(255,255,255,.08);padding-top:3rem}
+.quote-stat-val{font-family:var(--serif);font-size:2rem;letter-spacing:-.03em;line-height:1;margin-bottom:.4rem}
+.quote-stat-label{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+
+/* --- PRODUCT LINES --- */
+.lines-section{padding:8rem 3rem}
+.lines-section h2{font-family:var(--serif);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:400;line-height:1.2;letter-spacing:-.02em;margin-bottom:4rem;max-width:500px}
+.lines-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;perspective:1200px}
+.line-card{cursor:pointer;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out);transform-style:preserve-3d;will-change:transform}
+.line-card:hover{transform:translateY(-8px) rotateX(2deg);box-shadow:0 20px 40px rgba(20,18,16,.1)}
+.line-card-img{height:280px;overflow:hidden;margin-bottom:1.2rem;position:relative;border-radius:2px}
+.line-card-img img{width:100%;height:100%;object-fit:cover;will-change:transform;transition:transform .7s var(--ease-out)}
+.line-card:hover .line-card-img img{transform:scale(1.06)}
+.line-card h3{font-family:var(--serif);font-size:1.2rem;font-weight:400;margin-bottom:.5rem;letter-spacing:-.01em}
+.line-card-desc{font-size:.8rem;color:var(--muted);font-weight:300;line-height:1.6;margin-bottom:.8rem}
+.line-card-count{font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);transition:letter-spacing .4s var(--ease-out)}
+.line-card:hover .line-card-count{letter-spacing:.22em}
+
+/* --- CONTACT --- */
+.contact{background:var(--bg);color:var(--fg);padding:8rem 3rem;border-top:1px solid var(--line)}
+.contact-inner{max-width:900px;display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.contact h2{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.4rem);font-weight:400;line-height:1.2;letter-spacing:-.02em;margin-bottom:1.5rem}
+.contact-desc{font-size:.95rem;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:3rem}
+.contact-item{display:flex;flex-direction:column;gap:.2rem;margin-bottom:1.5rem}
+.contact-item-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.contact-item-value{font-family:var(--serif);font-size:1.1rem}
+.form-field{margin-bottom:1.5rem}
+.form-field label{display:block;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem}
+.form-field input,.form-field select,.form-field textarea{width:100%;background:transparent;border:none;border-bottom:1px solid var(--line);padding:.7rem 0;color:var(--fg);font-family:var(--sans);font-size:.95rem;font-weight:300;transition:border-color .3s var(--ease-smooth);outline:none}
+.form-field input::placeholder,.form-field textarea::placeholder{color:var(--faint)}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{border-bottom-color:var(--accent)}
+.form-field select{cursor:pointer;color:var(--fg)}
+.form-field select option{background:var(--bg);color:var(--fg)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+/* Custom select */
+.custom-select{position:relative;cursor:pointer}
+.cs-selected{padding:.7rem 0;border-bottom:1px solid var(--line);font-size:.95rem;font-weight:300;color:var(--fg);display:flex;justify-content:space-between;align-items:center;transition:border-color .3s}
+.cs-selected::after{content:'';width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);transition:transform .3s var(--ease-out);flex-shrink:0}
+.custom-select.open .cs-selected{border-bottom-color:var(--accent)}
+.custom-select.open .cs-selected::after{transform:rotate(-135deg)}
+.cs-selected.placeholder{color:var(--faint)}
+.cs-options{position:absolute;top:100%;left:0;right:0;background:var(--bg);border:1px solid var(--line);list-style:none;max-height:0;overflow:hidden;opacity:0;transition:max-height .35s var(--ease-out),opacity .25s;z-index:10;box-shadow:0 8px 24px rgba(20,18,16,.08)}
+.custom-select.open .cs-options{max-height:300px;opacity:1;overflow-y:auto}
+.cs-options li{padding:.7rem 1rem;font-size:.9rem;font-weight:300;color:var(--muted);transition:all .2s}
+.cs-options li:hover{background:rgba(184,137,58,.06);color:var(--fg)}
+.cs-options li.selected{color:var(--accent)}
+
+.submit-btn{margin-top:1rem;background:none;border:1px solid var(--fg);color:var(--fg);padding:.9rem 2.5rem;font-family:var(--sans);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .35s var(--ease-out)}
+.submit-btn:hover{background:var(--fg);color:var(--bg);transform:translateY(-2px);box-shadow:0 6px 20px rgba(20,18,16,.1)}
+
+/* --- FOOTER --- */
+footer{background:var(--fg);border-top:1px solid rgba(255,255,255,.06);padding:3rem 3rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+footer .footer-logo{display:block;margin-bottom:1rem}
+footer .footer-logo img{height:100px;width:auto}
+footer p{font-size:.7rem;color:var(--muted)}
+
+/* --- WHATSAPP --- */
+.wa-float{position:fixed;bottom:2rem;right:2rem;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:99;transition:all .35s var(--ease-out);box-shadow:0 4px 20px rgba(37,211,102,.25)}
+.wa-float:hover{transform:scale(1.1) translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,.35)}
+.wa-float svg{width:24px;height:24px;fill:white}
+
+/* --- ANIMATIONS --- */
+@keyframes rise{from{opacity:0;transform:translateY(var(--rise-y,30px))}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* Reveal system — GPU-accelerated */
+.reveal{opacity:0;transform:translate3d(0,30px,0);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.vis{opacity:1;transform:translate3d(0,0,0)}
+
+/* Staggered children inside reveal */
+.reveal .diff-item,
+.reveal .line-card,
+.reveal .number-item{opacity:0;transform:translate3d(0,20px,0);transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)}
+.reveal.vis .diff-item,
+.reveal.vis .line-card,
+.reveal.vis .number-item{opacity:1;transform:translate3d(0,0,0)}
+.reveal.vis .diff-item:nth-child(1),.reveal.vis .line-card:nth-child(1),.reveal.vis .number-item:nth-child(1){transition-delay:.05s}
+.reveal.vis .diff-item:nth-child(2),.reveal.vis .line-card:nth-child(2),.reveal.vis .number-item:nth-child(2){transition-delay:.12s}
+.reveal.vis .diff-item:nth-child(3),.reveal.vis .line-card:nth-child(3),.reveal.vis .number-item:nth-child(3){transition-delay:.19s}
+.reveal.vis .diff-item:nth-child(4),.reveal.vis .line-card:nth-child(4){transition-delay:.26s}
+.reveal.vis .diff-item:nth-child(5),.reveal.vis .line-card:nth-child(5){transition-delay:.33s}
+.reveal.vis .line-card:nth-child(6){transition-delay:.4s}
+
+/* Quote children stagger */
+.reveal .quote-line,.reveal .quote-text,.reveal .quote-attr,.reveal .quote-cta,.reveal .quote-stats{opacity:0;transform:translate3d(0,20px,0);transition:opacity .7s var(--ease-out),transform .7s var(--ease-out)}
+.reveal.vis .quote-line{opacity:1;transform:translate3d(0,0,0);transition-delay:.1s}
+.reveal.vis .quote-text{opacity:1;transform:translate3d(0,0,0);transition-delay:.25s}
+.reveal.vis .quote-attr{opacity:1;transform:translate3d(0,0,0);transition-delay:.4s}
+.reveal.vis .quote-cta{opacity:1;transform:translate3d(0,0,0);transition-delay:.55s}
+.reveal.vis .quote-stats{opacity:1;transform:translate3d(0,0,0);transition-delay:.7s}
+
+/* --- RESPONSIVE --- */
+@media(max-width:960px){
+  nav{padding:1.2rem 1.5rem}nav.scrolled{padding:.8rem 1.5rem}
+  .nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:var(--bg);align-items:center;justify-content:center;gap:2rem;z-index:100}
+  .nav-links.open a{font-size:1.1rem;color:var(--fg)}.menu-btn{display:block}
+  .hero{grid-template-columns:1fr;height:auto}.hero-text{padding:8rem 1.5rem 3rem}.hero-img{height:60vw}
+  .hero-img::after{background:linear-gradient(to bottom,var(--bg) 0%,transparent 20%)}
+  .divider{margin:0 1.5rem}.numbers{padding:3rem 1.5rem}.text-section{padding:5rem 1.5rem}
+  .img-band{grid-template-columns:1fr;height:auto;overflow:hidden}.img-band img{height:250px}
+  .diffs{padding:0 1.5rem 5rem}.quote-band{padding:5rem 1.5rem}
+  .lines-section{padding:5rem 1.5rem}.lines-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  .contact{padding:5rem 1.5rem}.contact-inner{grid-template-columns:1fr;gap:3rem}
+  footer{padding:1.5rem;flex-direction:column;gap:.5rem;text-align:center}
+  .form-row{grid-template-columns:1fr;gap:0}
+  .diff-item{grid-template-columns:40px 1fr;gap:1rem}
+}
+@media(max-width:600px){
+  .numbers{grid-template-columns:1fr;gap:1.5rem;text-align:left}
+  .number-item{display:flex;align-items:baseline;gap:1rem}.number-label{margin-top:0}
+  .lines-grid{grid-template-columns:1fr}
+  .line-card-img{height:220px}
+  .quote-stats{grid-template-columns:repeat(3,1fr);gap:1rem}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="logo">
+    <img src="img/logo.png" alt="Satchmo">
+  </a>
+  <button class="menu-btn" onclick="document.getElementById('links').classList.toggle('open')"><span></span><span></span></button>
+  <ul class="nav-links" id="links">
+    <li><a href="#about" onclick="closeM()">Nosotros</a></li>
+    <li><a href="#lines" onclick="closeM()">Productos</a></li>
+    <li><a href="productos.html" onclick="closeM()">Catálogo</a></li>
+    <li><a href="#contact" onclick="closeM()" class="nav-contact">Contactar</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-text">
+    <p class="hero-label">Panificadora industrial · Buenos Aires</p>
+    <h1>Tu negocio<br>no puede parar.<br>Tu pan <em>tampoco.</em></h1>
+    <p class="hero-desc">Sistema de abastecimiento industrial para gastronomía. Producción estandarizada, volumen real, entrega profesional.</p>
+    <div class="hero-cta-row">
+      <a href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20consultar%20por%20productos%20Satchmo" class="hero-btn" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Consultá por volumen
+      </a>
+      <a href="#lines" class="hero-link">Ver productos ↓</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="img/products/pasteleria-completa.jpg" alt="Panificados industriales Satchmo">
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- NUMBERS -->
+<div class="numbers reveal">
+  <div class="number-item"><div class="number-val">+20</div><div class="number-label">Años en el mercado</div></div>
+  <div class="number-item"><div class="number-val">100%</div><div class="number-label">Elaboración propia</div></div>
+  <div class="number-item"><div class="number-val">B2B</div><div class="number-label">Foco exclusivo gastronomía</div></div>
+</div>
+
+<hr class="divider">
+
+<!-- ABOUT -->
+<section class="text-section reveal" id="about">
+  <div class="tag">Quiénes somos</div>
+  <h2>Panificadora industrial con foco en tu operación</h2>
+  <p>Satchmo no es una panadería artesanal. Es un proveedor estratégico de infraestructura alimentaria para negocios gastronómicos. Producción estandarizada, control total de calidad, capacidad de volumen real. Productos diseñados para gastronomía, no para retail.</p>
+</section>
+
+<!-- IMAGE BAND -->
+<div class="img-band reveal">
+  <img src="img/about/produccion-equipo.jpg" alt="Equipo de producción Satchmo" loading="lazy">
+  <img src="img/about/baguettes.jpg" alt="Baguettes artesanales" loading="lazy">
+  <img src="img/about/artesanal.jpg" alt="Producción artesanal" loading="lazy">
+</div>
+
+<!-- DIFFS -->
+<section class="diffs reveal" style="padding-top:8rem">
+  <div class="diff-item">
+    <div class="diff-num">01</div>
+    <div><h3>Estandarización total</h3><p>El mismo producto, siempre, sin variaciones. Tu cliente recibe la misma experiencia en cada visita.</p></div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-num">02</div>
+    <div><h3>Escalabilidad real</h3><p>Abrís un segundo local, duplicás pedidos. Tu proveedor de pan no puede ser tu cuello de botella.</p></div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-num">03</div>
+    <div><h3>Eficiencia operativa</h3><p>Menos merma, menos mano de obra, menos improvisación. Freezer → horno → servicio.</p></div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-num">04</div>
+    <div><h3>Validado en Mangini</h3><p>Cada producto se usa diariamente en nuestra propia red de locales gastronómicos.</p></div>
+  </div>
+  <div class="diff-item">
+    <div class="diff-num">05</div>
+    <div><h3>Respaldo industrial</h3><p>Planta propia, equipamiento de escala, formato de entrega profesional.</p></div>
+  </div>
+</section>
+
+<!-- MANGINI QUOTE -->
+<section class="quote-band reveal">
+  <div class="quote-line"></div>
+  <p class="quote-text">Cada producto Satchmo se prueba, ajusta y valida todos los días en nuestros propios locales. No vendemos lo que no usamos.</p>
+  <p class="quote-attr">Validación Mangini — Red de locales propios</p>
+  <a href="https://mangini-web.vercel.app/" target="_blank" class="quote-cta">
+    <img src="img/logo-mangini.png" alt="Mangini">
+    <div class="quote-cta-text">
+      <div class="quote-cta-label">Validado en nuestras tiendas</div>
+      <div class="quote-cta-name">Visitanos</div>
+    </div>
+    <span class="arrow">→</span>
+  </a>
+  <div class="quote-stats">
+    <div><div class="quote-stat-val">42+</div><div class="quote-stat-label">Productos</div></div>
+    <div><div class="quote-stat-val">6</div><div class="quote-stat-label">Líneas</div></div>
+    <div><div class="quote-stat-val">100%</div><div class="quote-stat-label">Elaboración propia</div></div>
+  </div>
+</section>
+
+<!-- LINES -->
+<section class="lines-section reveal" id="lines">
+  <div class="tag">Líneas de producto</div>
+  <h2>Soluciones por tipo de negocio</h2>
+  <div class="lines-grid">
+    <div class="line-card">
+      <div class="line-card-img"><img src="img/lines/hamburguesas.jpg" alt="Panes para hamburguesa" loading="lazy"></div>
+      <h3>Hamburguesas</h3>
+      <p class="line-card-desc">Papa, Brioche, Parmesano, Signature Black, Green, Masa Madre y más.</p>
+      <div class="line-card-count">11 productos →</div>
+    </div>
+    <div class="line-card">
+      <div class="line-card-img"><img src="img/lines/panchos.jpg" alt="Panes para panchos" loading="lazy"></div>
+      <h3>Panchos & Hot Dogs</h3>
+      <p class="line-card-desc">Hot Dog Premium, Super Pancho Soft, Pancho Corto y Baguettin.</p>
+      <div class="line-card-count">4 productos →</div>
+    </div>
+    <div class="line-card">
+      <div class="line-card-img"><img src="img/lines/sandwicheria.jpg" alt="Sandwichería" loading="lazy"></div>
+      <h3>Sandwichería</h3>
+      <p class="line-card-desc">Figazza, Chapatta, Pebete, Baguettin XXL, Pan Árabe.</p>
+      <div class="line-card-count">8 productos →</div>
+    </div>
+    <div class="line-card">
+      <div class="line-card-img"><img src="img/lines/cafeteria.jpg" alt="Cafetería y bollería" loading="lazy"></div>
+      <h3>Cafetería & Bollería</h3>
+      <p class="line-card-desc">Medialunas, Pan de Campo, Pancitos Saborizados, Figacitas.</p>
+      <div class="line-card-count">6 productos →</div>
+    </div>
+    <div class="line-card">
+      <div class="line-card-img"><img src="img/lines/precocidos.jpg" alt="Panes pre-cocidos" loading="lazy"></div>
+      <h3>Pre-cocidos</h3>
+      <p class="line-card-desc">Mini Baguette, Migñon, Baguette 60cm, Milonga, Fonda.</p>
+      <div class="line-card-count">7 productos →</div>
+    </div>
+    <div class="line-card">
+      <div class="line-card-img"><img src="img/lines/varios.jpg" alt="Empanadas y varios" loading="lazy"></div>
+      <h3>Varios & Catering</h3>
+      <p class="line-card-desc">Empanadas, Tartas, Prepizzas, Pan Dulce.</p>
+      <div class="line-card-count">6 productos →</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner reveal">
+    <div>
+      <div class="tag">Contacto</div>
+      <h2>Iniciá tu consulta comercial</h2>
+      <p class="contact-desc">Respondemos en menos de 24hs hábiles. Sin compromiso, sin intermediarios.</p>
+      <div class="contact-item"><span class="contact-item-label">WhatsApp</span><span class="contact-item-value">+54 9 11 0000-0000</span></div>
+      <div class="contact-item"><span class="contact-item-label">Email</span><span class="contact-item-value">ventas@satchmo.com.ar</span></div>
+      <div class="contact-item"><span class="contact-item-label">Planta</span><span class="contact-item-value">Buenos Aires, Argentina</span></div>
+    </div>
+    <div>
+      <form onsubmit="handleForm(event)">
+        <div class="form-row">
+          <div class="form-field"><label>Tu nombre</label><input type="text" placeholder="Juan Pérez" required></div>
+          <div class="form-field"><label>Tu negocio</label><input type="text" placeholder="Nombre del local"></div>
+        </div>
+        <div class="form-field"><label>Tipo de negocio</label>
+          <div class="custom-select" data-name="tipo">
+            <div class="cs-selected">Seleccioná</div>
+            <ul class="cs-options">
+              <li data-value="Hamburguesería">Hamburguesería</li>
+              <li data-value="Cafetería / Brunch">Cafetería / Brunch</li>
+              <li data-value="Restaurante">Restaurante</li>
+              <li data-value="Food Truck">Food Truck</li>
+              <li data-value="Viandas / Catering">Viandas / Catering</li>
+              <li data-value="Otro">Otro</li>
+            </ul>
+            <input type="hidden" name="tipo">
+          </div>
+        </div>
+        <div class="form-field"><label>Producto de interés</label>
+          <div class="custom-select" data-name="producto">
+            <div class="cs-selected">¿Qué línea?</div>
+            <ul class="cs-options">
+              <li data-value="Hamburguesas">Hamburguesas</li>
+              <li data-value="Panchos">Panchos</li>
+              <li data-value="Sandwichería">Sandwichería</li>
+              <li data-value="Cafetería">Cafetería</li>
+              <li data-value="Pre-cocidos">Pre-cocidos</li>
+              <li data-value="Varios">Varios</li>
+              <li data-value="Catálogo completo">Catálogo completo</li>
+            </ul>
+            <input type="hidden" name="producto">
+          </div>
+        </div>
+        <div class="form-field"><label>Mensaje</label><textarea rows="2" placeholder="Contanos qué necesitás..."></textarea></div>
+        <button type="submit" class="submit-btn" id="submitBtn">Enviar consulta</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo"><img src="img/logo.png" alt="Satchmo"></a>
+  <p>© 2026 · Panificados industriales para gastronomía</p>
+</footer>
+
+<a href="https://wa.me/5491100000000?text=Hola%2C%20consulto%20por%20productos%20Satchmo" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+function closeM(){document.getElementById('links').classList.remove('open')}
+
+let ticking=false;
+window.addEventListener('scroll',()=>{
+  if(!ticking){
+    requestAnimationFrame(()=>{
+      document.getElementById('nav').classList.toggle('scrolled',scrollY>60);
+      ticking=false;
+    });
+    ticking=true;
+  }
+},{passive:true});
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('vis');
+      obs.unobserve(e.target);
+    }
+  });
+},{threshold:.06,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+function handleForm(e){
+  e.preventDefault();
+  const b=document.getElementById('submitBtn');
+  b.textContent='\u2713 Enviado';
+  b.style.borderColor='var(--accent)';
+  b.style.color='var(--accent)';
+  setTimeout(()=>{b.textContent='Enviar consulta';b.style.borderColor='';b.style.color=''},3000);
+}
+
+// Custom selects
+document.querySelectorAll('.custom-select').forEach(sel=>{
+  const selected=sel.querySelector('.cs-selected');
+  const options=sel.querySelectorAll('.cs-options li');
+  const hidden=sel.querySelector('input[type=hidden]');
+  selected.classList.add('placeholder');
+  selected.addEventListener('click',e=>{
+    e.stopPropagation();
+    document.querySelectorAll('.custom-select.open').forEach(s=>{if(s!==sel)s.classList.remove('open')});
+    sel.classList.toggle('open');
+  });
+  options.forEach(opt=>{
+    opt.addEventListener('click',()=>{
+      selected.textContent=opt.textContent;
+      selected.classList.remove('placeholder');
+      hidden.value=opt.dataset.value;
+      options.forEach(o=>o.classList.remove('selected'));
+      opt.classList.add('selected');
+      sel.classList.remove('open');
+    });
+  });
+});
+document.addEventListener('click',()=>{
+  document.querySelectorAll('.custom-select.open').forEach(s=>s.classList.remove('open'));
+});
+
+// 3D tilt on line cards
+document.querySelectorAll('.line-card').forEach(card=>{
+  card.addEventListener('mousemove',e=>{
+    const rect=card.getBoundingClientRect();
+    const x=(e.clientX-rect.left)/rect.width-.5;
+    const y=(e.clientY-rect.top)/rect.height-.5;
+    card.style.transform=`translateY(-8px) rotateY(${x*12}deg) rotateX(${-y*8}deg)`;
+  });
+  card.addEventListener('mouseleave',()=>{
+    card.style.transform='';
+  });
+});
+
+// 3D tilt on hero image
+const heroSection=document.querySelector('.hero-img');
+if(heroSection){
+  heroSection.addEventListener('mousemove',e=>{
+    const rect=heroSection.getBoundingClientRect();
+    const x=(e.clientX-rect.left)/rect.width-.5;
+    const y=(e.clientY-rect.top)/rect.height-.5;
+    heroSection.querySelector('img').style.transform=`scale(1.03) translate(${x*-10}px,${y*-10}px)`;
+  });
+  heroSection.addEventListener('mouseleave',()=>{
+    heroSection.querySelector('img').style.transform='';
+  });
+}
+
+// Parallax on scroll
+const heroImg=document.querySelector('.hero-img img');
+const imgBandImgs=document.querySelectorAll('.img-band img');
+let raf;
+window.addEventListener('scroll',()=>{
+  if(raf) return;
+  raf=requestAnimationFrame(()=>{
+    const y=window.scrollY;
+    if(heroImg) heroImg.style.transform='translateY('+y*0.15+'px) scale(1.03)';
+    imgBandImgs.forEach(img=>{
+      const rect=img.getBoundingClientRect();
+      if(rect.top<window.innerHeight && rect.bottom>0){
+        const offset=(rect.top-window.innerHeight*0.5)*0.08;
+        img.style.transform='translateY('+offset+'px) scale(1.02)';
+      }
+    });
+    raf=null;
+  });
+},{passive:true});
+</script>
+</body>
+</html>

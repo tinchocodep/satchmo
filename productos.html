@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Catálogo completo de productos Satchmo — Panificados industriales para gastronomía.">
+<title>Catálogo — Satchmo</title>
+<link rel="icon" type="image/x-icon" href="img/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FAFAF8;
+  --fg: #141210;
+  --muted: #8C8680;
+  --faint: #C9C3BB;
+  --line: #E8E4DE;
+  --accent: #B8893A;
+  --white: #FFFFFF;
+  --serif: 'Instrument Serif', 'Georgia', serif;
+  --sans: 'Geist', -apple-system, 'Helvetica Neue', sans-serif;
+  --ease-out: cubic-bezier(.16,1,.3,1);
+  --ease-smooth: cubic-bezier(.25,.46,.45,.94);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--accent);color:var(--white)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+
+/* --- NAV --- */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content:space-between;align-items:center;padding:.5rem 3rem;background:rgba(250,250,248,.96);backdrop-filter:blur(24px) saturate(1.2);-webkit-backdrop-filter:blur(24px) saturate(1.2);border-bottom:1px solid var(--line);transition:padding .4s var(--ease-out)}
+.logo{display:flex;align-items:center}
+.logo img{height:60px;width:auto}
+.nav-links{display:flex;gap:2.5rem;list-style:none;align-items:center}
+.nav-links a{font-size:.8rem;color:var(--muted);letter-spacing:.06em;transition:color .3s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-.3rem;left:0;width:0;height:1px;background:var(--fg);transition:width .4s var(--ease-out)}
+.nav-links a:hover{color:var(--fg)}
+.nav-links a:hover::after{width:100%}
+.nav-links a.active{color:var(--fg)}
+.nav-links a.active::after{width:100%}
+.nav-contact{font-size:.75rem!important;letter-spacing:.1em!important;text-transform:uppercase;color:var(--fg)!important;padding:.55rem 1.3rem;border:1px solid var(--fg);transition:all .35s var(--ease-out)!important}
+.nav-contact::after{display:none!important}
+.nav-contact:hover{background:var(--fg);color:var(--bg)!important}
+.menu-btn{display:none;background:none;border:none;cursor:pointer;padding:.5rem}
+.menu-btn span{display:block;width:20px;height:1px;background:var(--fg);margin:5px 0;transition:all .3s}
+
+/* --- PAGE HEADER --- */
+.page-header{padding:10rem 3rem 4rem;max-width:700px}
+.page-header .tag{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:1.5rem}
+.page-header h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3.2rem);font-weight:400;line-height:1.15;letter-spacing:-.03em;margin-bottom:1rem}
+.page-header p{font-size:1rem;font-weight:300;color:var(--muted);line-height:1.75}
+
+/* --- FILTERS --- */
+.filters-bar{padding:0 3rem 3rem;display:flex;gap:.5rem;flex-wrap:wrap;position:sticky;top:70px;z-index:50;background:var(--bg);padding-top:1.5rem;border-bottom:1px solid var(--line);padding-bottom:1.5rem}
+.search-box{flex:1;max-width:300px;position:relative}
+.search-box input{width:100%;background:transparent;border:1px solid var(--line);padding:.5rem 1rem .5rem 2.2rem;font-family:var(--sans);font-size:.8rem;color:var(--fg);outline:none;transition:border-color .3s;border-radius:2px}
+.search-box input::placeholder{color:var(--faint)}
+.search-box input:focus{border-color:var(--accent)}
+.search-box::before{content:'';position:absolute;left:.7rem;top:50%;transform:translateY(-50%);width:12px;height:12px;border:1.5px solid var(--muted);border-radius:50%;pointer-events:none}
+.search-box::after{content:'';position:absolute;left:1.55rem;top:60%;width:5px;height:1.5px;background:var(--muted);transform:rotate(45deg);pointer-events:none}
+.filter-btn{background:none;border:1px solid var(--line);padding:.5rem 1.2rem;font-family:var(--sans);font-size:.75rem;color:var(--muted);cursor:pointer;transition:all .3s var(--ease-out);letter-spacing:.02em;border-radius:2px}
+.filter-btn:hover{border-color:var(--fg);color:var(--fg)}
+.filter-btn.active{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+
+/* --- PRODUCTS GRID --- */
+.catalog{padding:3rem 3rem 8rem}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2rem;perspective:1200px}
+.p-card{cursor:pointer;will-change:transform,opacity;transition:transform .5s var(--ease-out),box-shadow .5s var(--ease-out),opacity .5s var(--ease-out);transform-style:preserve-3d;opacity:0;transform:translateY(20px)}
+.p-card.card-vis{opacity:1;transform:translateY(0)}
+.p-card:hover{transform:translateY(-6px) rotateX(2deg);box-shadow:0 16px 32px rgba(20,18,16,.08)}
+.p-card-img{height:220px;overflow:hidden;background:var(--line);margin-bottom:1rem;position:relative;border-radius:2px}
+.p-card-img img{width:100%;height:100%;object-fit:cover;will-change:transform;transition:transform .7s var(--ease-out)}
+.p-card:hover .p-card-img img{transform:scale(1.06)}
+.p-card-line{font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:.25rem}
+.p-card h4{font-family:var(--serif);font-size:1.05rem;font-weight:400;letter-spacing:-.01em;margin-bottom:.4rem}
+.p-card-format{font-size:.8rem;color:var(--muted);font-weight:300;margin-bottom:.6rem}
+.p-card-cta{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg);transition:all .35s var(--ease-out)}
+.p-card:hover .p-card-cta{color:var(--accent);letter-spacing:.14em}
+
+/* --- FOOTER --- */
+footer{background:var(--fg);border-top:1px solid rgba(255,255,255,.06);padding:3rem 3rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
+footer .footer-logo img{height:100px;width:auto}
+footer p{font-size:.7rem;color:var(--muted)}
+
+/* --- WHATSAPP --- */
+.wa-float{position:fixed;bottom:2rem;right:2rem;width:52px;height:52px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:99;transition:transform .3s;box-shadow:0 2px 16px rgba(37,211,102,.3)}
+.wa-float:hover{transform:scale(1.08)}
+.wa-float svg{width:24px;height:24px;fill:white}
+
+/* --- RESPONSIVE --- */
+@media(max-width:960px){
+  nav{padding:.8rem 1.5rem}
+  .nav-links{display:none}.nav-links.open{display:flex;flex-direction:column;position:fixed;inset:0;background:var(--bg);align-items:center;justify-content:center;gap:2rem;z-index:100}
+  .nav-links.open a{font-size:1.1rem;color:var(--fg)}.menu-btn{display:block}
+  .page-header{padding:7rem 1.5rem 3rem}
+  .filters-bar{padding:1rem 1.5rem;top:55px}
+  .catalog{padding:2rem 1.5rem 5rem}
+  .products-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
+  footer{padding:2rem 1.5rem}
+}
+@media(max-width:600px){
+  .products-grid{grid-template-columns:1fr}
+  .p-card-img{height:220px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo"><img src="img/logo.png" alt="Satchmo"></a>
+  <button class="menu-btn" onclick="document.getElementById('links').classList.toggle('open')"><span></span><span></span></button>
+  <ul class="nav-links" id="links">
+    <li><a href="index.html#about" onclick="closeM()">Nosotros</a></li>
+    <li><a href="index.html#lines" onclick="closeM()">Productos</a></li>
+    <li><a href="productos.html" class="active" onclick="closeM()">Catálogo</a></li>
+    <li><a href="index.html#contact" onclick="closeM()" class="nav-contact">Contactar</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <div class="tag">Catálogo completo</div>
+  <h1>Todos nuestros productos</h1>
+  <p>42 productos en 6 líneas. Consultá disponibilidad y volumen por WhatsApp.</p>
+</section>
+
+<!-- FILTERS -->
+<div class="filters-bar" id="filtersBar">
+  <div class="search-box"><input type="text" id="searchInput" placeholder="Buscar producto..." oninput="doSearch()"></div>
+</div>
+
+<!-- CATALOG -->
+<section class="catalog">
+  <div class="products-grid" id="productsGrid"></div>
+</section>
+
+<footer>
+  <a href="index.html" class="footer-logo"><img src="img/logo.png" alt="Satchmo"></a>
+  <p>&copy; 2026 &middot; Panificados industriales para gastronomía</p>
+</footer>
+
+<a href="https://wa.me/5491100000000?text=Hola%2C%20consulto%20por%20productos%20Satchmo" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const productImgs = {
+  // Hamburguesas - bollitos redondos variados
+  "Pan de Papa Premium": "img/products/panes-variados.jpg",
+  "Pan de Papa Premium Pro": "img/products/panes-tabla.jpg",
+  "Pan de Papa MAXI 12cm": "img/products/panes-closeup.jpg",
+  "Pan de Papa Premium Hongo": "img/products/panes-closeup.jpg",
+  "Pan Brioche Doble Semillado": "img/products/pan-semillas-close.jpg",
+  "Pan Parmesano": "img/products/panes-closeup.jpg",
+  "Signature Black": "img/products/pan-masa-madre.jpg",
+  "Pan Black": "img/products/pan-masa-madre-corte.jpg",
+  "Pan Green": "img/products/pan-multicereal.jpg",
+  "Masa Madre Multicereal": "img/products/pan-multicereal-close.jpg",
+  "Pan de Medialuna": "img/products/medialunas-manteca.jpg",
+  // Panchos - baguettes alargadas
+  "Pan de Hot Dog Premium": "img/products/baguettes.jpg",
+  "Pan de Super Pancho Soft": "img/products/baguettes-close.jpg",
+  "Pan de Pancho Corto Soft": "img/products/baguettes-close.jpg",
+  "Pan Baguettin": "img/products/baguettes.jpg",
+  // Sandwichería
+  "Pan Figazza Premium": "img/products/pan-grande.jpg",
+  "Pan Chapatta R\u00fastica con Avena": "img/products/pan-semillas-rebanado.jpg",
+  "Figaza con Queso": "img/products/pan-grande.jpg",
+  "Pebete Grande": "img/products/pan-campo.jpg",
+  "Baguettin XXL Parmesano 25cm": "img/products/pan-semillas.jpg",
+  "Baguettin XXL Multicereal 25cm": "img/products/pan-semillas-rebanado.jpg",
+  "Baguettin XXL Soft 25cm": "img/products/baguettes-harina.jpg",
+  "Pan \u00c1rabe 17cm": "img/products/pan-rebanado-tabla.jpg",
+  // Cafetería
+  "Medialunas de Manteca": "img/products/medialunas-manteca.jpg",
+  "Medialunas de Grasa": "img/products/medialunas-grasa.jpg",
+  "Pan de Campo 500g": "img/products/pan-campo.jpg",
+  "Pancitos Saborizados": "img/products/bollitos.jpg",
+  "Figacitas de Manteca": "img/products/bollitos.jpg",
+  "Salvaditos": "img/products/panes-variados-2.jpg",
+  // Pre-cocidos - baguettes con harina
+  "Pan Mini Baguette": "img/products/baguettes-harina.jpg",
+  "Pan Mig\u00f1on": "img/products/pan-campo-close.jpg",
+  "\u00bd Baguette": "img/products/baguettes-harina.jpg",
+  "Baguettin 21cm": "img/products/baguettes-close.jpg",
+  "Milonga": "img/products/pan-campo.jpg",
+  "Baguette 60cm": "img/products/baguettes.jpg",
+  "Pan Fonda": "img/products/pan-campo-close.jpg",
+  // Varios
+  "Tapas de Empanadas 150g": "img/products/tarta-individual.jpg",
+  "Tapas de Tartas 300g": "img/products/tarta-espinaca.jpg",
+  "Prepizzas de Tomate": "img/products/tarta-espinaca.jpg",
+  "Prepizzas de Cebolla Premium": "img/products/tarta-individual.jpg",
+  "Pan Dulce 1kg": "img/products/pasteleria-completa.jpg",
+  "Pan Dulce \u00bdkg": "img/products/pasteleria-completa.jpg",
+};
+
+const catImgs = {
+  hamburguesa: "img/products/panes-variados.jpg",
+  pancho: "img/products/baguettes.jpg",
+  sandwicheria: "img/products/pan-semillas.jpg",
+  cafeteria: "img/products/medialunas-manteca.jpg",
+  precocido: "img/products/baguettes-harina.jpg",
+  varios: "img/products/tarta-individual.jpg",
+};
+
+const P=[
+{n:"Pan de Papa Premium",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan de Papa Premium Pro",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan de Papa MAXI 12cm",l:"hamburguesa",f:"36u / caja"},
+{n:"Pan de Papa Premium Hongo",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan Brioche Doble Semillado",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan Parmesano",l:"hamburguesa",f:"48u / caja"},
+{n:"Signature Black",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan Black",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan Green",l:"hamburguesa",f:"48u / caja"},
+{n:"Masa Madre Multicereal",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan de Medialuna",l:"hamburguesa",f:"48u / caja"},
+{n:"Pan de Hot Dog Premium",l:"pancho",f:"45u / caja"},
+{n:"Pan de Super Pancho Soft",l:"pancho",f:"48u / caja"},
+{n:"Pan de Pancho Corto Soft",l:"pancho",f:"48u / caja"},
+{n:"Pan Baguettin",l:"pancho",f:"45u / caja"},
+{n:"Pan Figazza Premium",l:"sandwicheria",f:"48u / caja"},
+{n:"Pan Chapatta R\u00fastica con Avena",l:"sandwicheria",f:"45u / caja"},
+{n:"Figaza con Queso",l:"sandwicheria",f:"48u / caja"},
+{n:"Pebete Grande",l:"sandwicheria",f:"40u / caja"},
+{n:"Baguettin XXL Parmesano 25cm",l:"sandwicheria",f:"48u / caja"},
+{n:"Baguettin XXL Multicereal 25cm",l:"sandwicheria",f:"48u / caja"},
+{n:"Baguettin XXL Soft 25cm",l:"sandwicheria",f:"48u / caja"},
+{n:"Pan \u00c1rabe 17cm",l:"sandwicheria",f:"50u / caja"},
+{n:"Medialunas de Manteca",l:"cafeteria",f:"112u / caja"},
+{n:"Medialunas de Grasa",l:"cafeteria",f:"112u / caja"},
+{n:"Pan de Campo 500g",l:"cafeteria",f:"50u / caja"},
+{n:"Pancitos Saborizados",l:"cafeteria",f:"15kg / bolsa"},
+{n:"Figacitas de Manteca",l:"cafeteria",f:"15kg / bolsa"},
+{n:"Salvaditos",l:"cafeteria",f:"15kg / bolsa"},
+{n:"Pan Mini Baguette",l:"precocido",f:"6kg / bolsa"},
+{n:"Pan Mig\u00f1on",l:"precocido",f:"6kg / bolsa"},
+{n:"\u00bd Baguette",l:"precocido",f:"6kg / bolsa"},
+{n:"Baguettin 21cm",l:"precocido",f:"6kg / bolsa"},
+{n:"Milonga",l:"precocido",f:"6kg / bolsa"},
+{n:"Baguette 60cm",l:"precocido",f:"6kg / bolsa"},
+{n:"Pan Fonda",l:"precocido",f:"6kg / bolsa"},
+{n:"Tapas de Empanadas 150g",l:"varios",f:"96u / caja"},
+{n:"Tapas de Tartas 300g",l:"varios",f:"96u / caja"},
+{n:"Prepizzas de Tomate",l:"varios",f:"60u / caja"},
+{n:"Prepizzas de Cebolla Premium",l:"varios",f:"60u / caja"},
+{n:"Pan Dulce 1kg",l:"varios",f:"6u / caja"},
+{n:"Pan Dulce \u00bdkg",l:"varios",f:"12u / caja"},
+];
+
+const labels={hamburguesa:"Hamburguesas",pancho:"Panchos",sandwicheria:"Sandwicher\u00eda",cafeteria:"Cafeter\u00eda",precocido:"Pre-cocidos",varios:"Varios"};
+let current='all';
+
+function getImg(p){return productImgs[p.n]||catImgs[p.l]||null}
+
+let searchTerm='';
+
+function doSearch(){
+  searchTerm=document.getElementById('searchInput').value.toLowerCase();
+  render();
+}
+
+function buildFilters(){
+  const c=document.getElementById('filtersBar');
+  const search=c.querySelector('.search-box').outerHTML;
+  c.innerHTML=search+'<button class="filter-btn active" onclick="setFilter(\'all\')">Todos</button>'+
+    Object.entries(labels).map(([k,v])=>'<button class="filter-btn" onclick="setFilter(\''+k+'\')">'+v+'</button>').join('');
+  document.getElementById('searchInput').value=searchTerm;
+}
+
+function render(){
+  const grid=document.getElementById('productsGrid');
+  let items=current==='all'?P:P.filter(p=>p.l===current);
+  if(searchTerm) items=items.filter(p=>p.n.toLowerCase().includes(searchTerm));
+  grid.innerHTML=items.map(p=>{
+    const img=getImg(p);
+    return '<a href="https://wa.me/5491100000000?text=Hola%2C%20consulto%20por%20'+encodeURIComponent(p.n)+'%20Satchmo" target="_blank" class="p-card">'+
+      '<div class="p-card-img">'+(img?'<img src="'+img+'" alt="'+p.n+'" loading="lazy">':'')+'</div>'+
+      '<div class="p-card-line">'+labels[p.l]+'</div>'+
+      '<h4>'+p.n+'</h4>'+
+      '<div class="p-card-format">'+p.f+'</div>'+
+      '<span class="p-card-cta">Consultar \u2192</span>'+
+    '</a>';
+  }).join('');
+  requestAnimationFrame(()=>{
+    grid.querySelectorAll('.p-card').forEach((card,i)=>{
+      setTimeout(()=>card.classList.add('card-vis'),i*40);
+    });
+  });
+}
+
+function setFilter(f){
+  current=f;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.remove('active');
+    const map={'Todos':'all','Hamburguesas':'hamburguesa','Panchos':'pancho','Sandwicher\u00eda':'sandwicheria','Cafeter\u00eda':'cafeteria','Pre-cocidos':'precocido','Varios':'varios'};
+    if(map[b.textContent.trim()]===f) b.classList.add('active');
+  });
+  render();
+}
+
+function closeM(){document.getElementById('links').classList.remove('open')}
+
+// 3D tilt on product cards
+document.getElementById('productsGrid').addEventListener('mousemove',e=>{
+  const card=e.target.closest('.p-card');
+  if(!card) return;
+  const rect=card.getBoundingClientRect();
+  const x=(e.clientX-rect.left)/rect.width-.5;
+  const y=(e.clientY-rect.top)/rect.height-.5;
+  card.style.transform='translateY(-6px) rotateY('+x*10+'deg) rotateX('+-y*6+'deg)';
+});
+document.getElementById('productsGrid').addEventListener('mouseleave',e=>{
+  const card=e.target.closest('.p-card');
+  if(card) card.style.transform='';
+},true);
+document.getElementById('productsGrid').addEventListener('mouseout',e=>{
+  const card=e.target.closest('.p-card');
+  if(card && !card.contains(e.relatedTarget)) card.style.transform='';
+});
+
+buildFilters();
+render();
+
+// Check URL hash for pre-filter
+const hash=window.location.hash.slice(1);
+if(hash&&labels[hash]) setFilter(hash);
+</script>
+</body>
+</html>

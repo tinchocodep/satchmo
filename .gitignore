@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+
+# Original photos (not optimized for web)
+*.JPG
+*.HEIC
+*.PNG
+*.zip
+PRODU DE FOTOS*/
+img_backup/
+
+# Source files not needed in repo
+logo_mangini.png
+satchmo.html
