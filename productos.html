@@ -56,7 +56,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .page-header p{font-size:1rem;font-weight:300;color:var(--muted);line-height:1.75}
 
 /* --- FILTERS --- */
-.filters-bar{padding:0 3rem 3rem;display:flex;gap:.5rem;flex-wrap:wrap;position:sticky;top:70px;z-index:50;background:var(--bg);padding-top:1.5rem;border-bottom:1px solid var(--line);padding-bottom:1.5rem}
+.filters-bar{padding:0 3rem;position:sticky;top:70px;z-index:50;background:var(--bg);padding-top:1.5rem;border-bottom:1px solid var(--line);padding-bottom:1rem}
+.filter-row{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-bottom:.6rem}
+.filter-row:last-child{margin-bottom:0}
+.filter-row-secondary{gap:1.5rem}
+.filter-row-secondary .filter-btn{border:none;padding:.4rem 0;font-size:.8rem;letter-spacing:.04em;border-bottom:2px solid transparent}
+.filter-row-secondary .filter-btn.active{background:none;color:var(--fg);border-bottom:2px solid var(--fg)}
+.filter-row-secondary .filter-btn:hover{background:none;color:var(--fg)}
+.product-count{font-size:.8rem;color:var(--muted);font-weight:300;margin-top:.4rem;margin-bottom:.2rem}
 .search-box{flex:1;max-width:300px;position:relative}
 .search-box input{width:100%;background:transparent;border:1px solid var(--line);padding:.5rem 1rem .5rem 2.2rem;font-family:var(--sans);font-size:.8rem;color:var(--fg);outline:none;transition:border-color .3s;border-radius:2px}
 .search-box input::placeholder{color:var(--faint)}
@@ -81,6 +88,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;justify-content
 .p-card-format{font-size:.8rem;color:var(--muted);font-weight:300;margin-bottom:.6rem}
 .p-card-cta{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--fg);transition:all .35s var(--ease-out)}
 .p-card:hover .p-card-cta{color:var(--accent);letter-spacing:.14em}
+.p-card-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.5rem}
+.tag-badge{font-size:.6rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .6rem;border-radius:2px;line-height:1}
+.tag-fresco{background:#6B8F5E;color:#fff}
+.tag-precocido{background:#8C7B5E;color:#fff}
+.tag-congelado{background:#5E7080;color:#fff}
 
 /* --- FOOTER --- */
 footer{background:var(--fg);border-top:1px solid rgba(255,255,255,.06);padding:3rem 3rem 2rem;display:flex;flex-direction:column;align-items:center;gap:1rem}
@@ -105,7 +117,7 @@ footer p{font-size:.7rem;color:var(--muted)}
   .nav-links.open .nav-contact{font-size:.85rem!important;padding:.7rem 1.8rem;margin-top:1rem}
   .menu-btn{display:block;z-index:101}
   .page-header{padding:7rem 1.5rem 3rem}
-  .filters-bar{padding:1rem 1.5rem;top:55px;gap:.4rem}
+  .filters-bar{padding:1rem 1.5rem;top:55px}
   .catalog{padding:2rem 1.5rem 5rem}
   .products-grid{grid-template-columns:1fr 1fr;gap:1.5rem}
   footer{padding:2rem 1.5rem}
@@ -118,7 +130,7 @@ footer p{font-size:.7rem;color:var(--muted)}
   .page-header{padding:6rem 1.2rem 2rem}
   .page-header h1{font-size:1.8rem}
   .page-header p{font-size:.9rem}
-  .filters-bar{padding:.8rem 1.2rem;top:50px;gap:.3rem}
+  .filters-bar{padding:.8rem 1.2rem;top:50px}
   .filter-btn{padding:.4rem .8rem;font-size:.7rem}
   .search-box{max-width:100%;width:100%;margin-bottom:.5rem}
   .catalog{padding:1.5rem 1.2rem 4rem}
@@ -160,7 +172,9 @@ footer p{font-size:.7rem;color:var(--muted)}
 
 <!-- FILTERS -->
 <div class="filters-bar" id="filtersBar">
-  <div class="search-box"><input type="text" id="searchInput" placeholder="Buscar producto..." oninput="doSearch()"></div>
+  <div class="filter-row" id="catRow"></div>
+  <div class="filter-row filter-row-secondary" id="fmtRow"></div>
+  <div class="product-count" id="productCount"></div>
 </div>
 
 <!-- CATALOG -->
@@ -239,82 +253,84 @@ const catImgs = {
 };
 
 const P=[
-{n:"Pan de Papa Premium",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan de Papa Premium Pro",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan de Papa MAXI 12cm",l:"hamburguesa",f:"36u / caja"},
-{n:"Pan de Papa Premium Hongo",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan Brioche Doble Semillado",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan Parmesano",l:"hamburguesa",f:"48u / caja"},
-{n:"Signature Black",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan Black",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan Green",l:"hamburguesa",f:"48u / caja"},
-{n:"Masa Madre Multicereal",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan de Medialuna",l:"hamburguesa",f:"48u / caja"},
-{n:"Pan de Hot Dog Premium",l:"pancho",f:"45u / caja"},
-{n:"Pan de Super Pancho Soft",l:"pancho",f:"48u / caja"},
-{n:"Pan de Pancho Corto Soft",l:"pancho",f:"48u / caja"},
-{n:"Pan Baguettin",l:"pancho",f:"45u / caja"},
-{n:"Pan Figazza Premium",l:"sandwicheria",f:"48u / caja"},
-{n:"Pan Chapatta R\u00fastica con Avena",l:"sandwicheria",f:"45u / caja"},
-{n:"Figaza con Queso",l:"sandwicheria",f:"48u / caja"},
-{n:"Pebete Grande",l:"sandwicheria",f:"40u / caja"},
-{n:"Baguettin XXL Parmesano 25cm",l:"sandwicheria",f:"48u / caja"},
-{n:"Baguettin XXL Multicereal 25cm",l:"sandwicheria",f:"48u / caja"},
-{n:"Baguettin XXL Soft 25cm",l:"sandwicheria",f:"48u / caja"},
-{n:"Pan \u00c1rabe 17cm",l:"sandwicheria",f:"50u / caja"},
-{n:"Medialunas de Manteca",l:"cafeteria",f:"112u / caja"},
-{n:"Medialunas de Grasa",l:"cafeteria",f:"112u / caja"},
-{n:"Pan de Campo 500g",l:"cafeteria",f:"50u / caja"},
-{n:"Pancitos Saborizados",l:"cafeteria",f:"15kg / bolsa"},
-{n:"Figacitas de Manteca",l:"cafeteria",f:"15kg / bolsa"},
-{n:"Salvaditos",l:"cafeteria",f:"15kg / bolsa"},
-{n:"Pan Mini Baguette",l:"precocido",f:"6kg / bolsa"},
-{n:"Pan Mig\u00f1on",l:"precocido",f:"6kg / bolsa"},
-{n:"\u00bd Baguette",l:"precocido",f:"6kg / bolsa"},
-{n:"Baguettin 21cm",l:"precocido",f:"6kg / bolsa"},
-{n:"Milonga",l:"precocido",f:"6kg / bolsa"},
-{n:"Baguette 60cm",l:"precocido",f:"6kg / bolsa"},
-{n:"Pan Fonda",l:"precocido",f:"6kg / bolsa"},
-{n:"Tapas de Empanadas 150g",l:"varios",f:"96u / caja"},
-{n:"Tapas de Tartas 300g",l:"varios",f:"96u / caja"},
-{n:"Prepizzas de Tomate",l:"varios",f:"60u / caja"},
-{n:"Prepizzas de Cebolla Premium",l:"varios",f:"60u / caja"},
-{n:"Pan Dulce 1kg",l:"varios",f:"6u / caja"},
-{n:"Pan Dulce \u00bdkg",l:"varios",f:"12u / caja"},
+{n:"Pan de Papa Premium",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan de Papa Premium Pro",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan de Papa MAXI 12cm",l:"hamburguesa",f:"36u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan de Papa Premium Hongo",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan Brioche Doble Semillado",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan Parmesano",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Signature Black",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan Black",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan Green",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Masa Madre Multicereal",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan de Medialuna",l:"hamburguesa",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan de Hot Dog Premium",l:"pancho",f:"45u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan de Super Pancho Soft",l:"pancho",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan de Pancho Corto Soft",l:"pancho",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan Baguettin",l:"pancho",f:"45u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan Figazza Premium",l:"sandwicheria",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan Chapatta R\u00fastica con Avena",l:"sandwicheria",f:"45u / caja",t:["fresco","precocido","congelado"]},
+{n:"Figaza con Queso",l:"sandwicheria",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pebete Grande",l:"sandwicheria",f:"40u / caja",t:["fresco","precocido"]},
+{n:"Baguettin XXL Parmesano 25cm",l:"sandwicheria",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Baguettin XXL Multicereal 25cm",l:"sandwicheria",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Baguettin XXL Soft 25cm",l:"sandwicheria",f:"48u / caja",t:["fresco","precocido","congelado"]},
+{n:"Pan \u00c1rabe 17cm",l:"sandwicheria",f:"50u / caja",t:["fresco","congelado"]},
+{n:"Medialunas de Manteca",l:"cafeteria",f:"112u / caja",t:["fresco","congelado"]},
+{n:"Medialunas de Grasa",l:"cafeteria",f:"112u / caja",t:["fresco","congelado"]},
+{n:"Pan de Campo 500g",l:"cafeteria",f:"50u / caja",t:["fresco"]},
+{n:"Pancitos Saborizados",l:"cafeteria",f:"15kg / bolsa",t:["fresco"]},
+{n:"Figacitas de Manteca",l:"cafeteria",f:"15kg / bolsa",t:["fresco"]},
+{n:"Salvaditos",l:"cafeteria",f:"15kg / bolsa",t:["fresco"]},
+{n:"Pan Mini Baguette",l:"precocido",f:"6kg / bolsa",t:["precocido","congelado"]},
+{n:"Pan Mig\u00f1on",l:"precocido",f:"6kg / bolsa",t:["precocido","congelado"]},
+{n:"\u00bd Baguette",l:"precocido",f:"6kg / bolsa",t:["precocido","congelado"]},
+{n:"Baguettin 21cm",l:"precocido",f:"6kg / bolsa",t:["precocido","congelado"]},
+{n:"Milonga",l:"precocido",f:"6kg / bolsa",t:["precocido","congelado"]},
+{n:"Baguette 60cm",l:"precocido",f:"6kg / bolsa",t:["precocido","congelado"]},
+{n:"Pan Fonda",l:"precocido",f:"6kg / bolsa",t:["precocido","congelado"]},
+{n:"Tapas de Empanadas 150g",l:"varios",f:"96u / caja",t:["fresco","congelado"]},
+{n:"Tapas de Tartas 300g",l:"varios",f:"96u / caja",t:["fresco","congelado"]},
+{n:"Prepizzas de Tomate",l:"varios",f:"60u / caja",t:["precocido","congelado"]},
+{n:"Prepizzas de Cebolla Premium",l:"varios",f:"60u / caja",t:["precocido","congelado"]},
+{n:"Pan Dulce 1kg",l:"varios",f:"6u / caja",t:["fresco"]},
+{n:"Pan Dulce \u00bdkg",l:"varios",f:"12u / caja",t:["fresco"]},
 ];
 
 const labels={hamburguesa:"Hamburguesas",pancho:"Panchos",sandwicheria:"Sandwicher\u00eda",cafeteria:"Cafeter\u00eda",precocido:"Pre-cocidos",varios:"Varios"};
-let current='all';
+const fmtLabels={all:"Todos los formatos",fresco:"Fresco",precocido:"Pre-cocido",congelado:"Congelado"};
+const tagLabels={fresco:"Fresco",precocido:"Pre-cocido",congelado:"Congelado"};
+let currentCat='all';
+let currentFmt='all';
 
 function getImg(p){return productImgs[p.n]||catImgs[p.l]||null}
 
-let searchTerm='';
-
-function doSearch(){
-  searchTerm=document.getElementById('searchInput').value.toLowerCase();
-  render();
+function buildFilters(){
+  const catRow=document.getElementById('catRow');
+  catRow.innerHTML='<button class="filter-btn active" data-cat="all" onclick="setCatFilter(\'all\')">Todos</button>'+
+    Object.entries(labels).map(([k,v])=>'<button class="filter-btn" data-cat="'+k+'" onclick="setCatFilter(\''+k+'\')">'+v+'</button>').join('');
+  const fmtRow=document.getElementById('fmtRow');
+  fmtRow.innerHTML=Object.entries(fmtLabels).map(([k,v])=>'<button class="filter-btn'+(k==='all'?' active':'')+'" data-fmt="'+k+'" onclick="setFmtFilter(\''+k+'\')">'+v+'</button>').join('');
 }
 
-function buildFilters(){
-  const c=document.getElementById('filtersBar');
-  const search=c.querySelector('.search-box').outerHTML;
-  c.innerHTML=search+'<button class="filter-btn active" onclick="setFilter(\'all\')">Todos</button>'+
-    Object.entries(labels).map(([k,v])=>'<button class="filter-btn" onclick="setFilter(\''+k+'\')">'+v+'</button>').join('');
-  document.getElementById('searchInput').value=searchTerm;
+function getFiltered(){
+  let items=currentCat==='all'?P:P.filter(p=>p.l===currentCat);
+  if(currentFmt!=='all') items=items.filter(p=>p.t.includes(currentFmt));
+  return items;
 }
 
 function render(){
   const grid=document.getElementById('productsGrid');
-  let items=current==='all'?P:P.filter(p=>p.l===current);
-  if(searchTerm) items=items.filter(p=>p.n.toLowerCase().includes(searchTerm));
+  const items=getFiltered();
+  document.getElementById('productCount').textContent=items.length+' producto'+(items.length!==1?'s':'');
   grid.innerHTML=items.map(p=>{
     const img=getImg(p);
+    const tags=p.t.map(t=>'<span class="tag-badge tag-'+t+'">'+tagLabels[t]+'</span>').join('');
     return '<a href="https://wa.me/5491126952459?text=Hola%2C%20consulto%20por%20'+encodeURIComponent(p.n)+'%20Satchmo" target="_blank" class="p-card">'+
       '<div class="p-card-img">'+(img?'<img src="'+img+'" alt="'+p.n+'" loading="lazy">':'')+'</div>'+
-      '<div class="p-card-line">'+labels[p.l]+'</div>'+
       '<h4>'+p.n+'</h4>'+
       '<div class="p-card-format">'+p.f+'</div>'+
-      '<span class="p-card-cta">Consultar \u2192</span>'+
+      '<div class="p-card-tags">'+tags+'</div>'+
     '</a>';
   }).join('');
   requestAnimationFrame(()=>{
@@ -324,12 +340,18 @@ function render(){
   });
 }
 
-function setFilter(f){
-  current=f;
-  document.querySelectorAll('.filter-btn').forEach(b=>{
-    b.classList.remove('active');
-    const map={'Todos':'all','Hamburguesas':'hamburguesa','Panchos':'pancho','Sandwicher\u00eda':'sandwicheria','Cafeter\u00eda':'cafeteria','Pre-cocidos':'precocido','Varios':'varios'};
-    if(map[b.textContent.trim()]===f) b.classList.add('active');
+function setCatFilter(f){
+  currentCat=f;
+  document.querySelectorAll('#catRow .filter-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.cat===f);
+  });
+  render();
+}
+
+function setFmtFilter(f){
+  currentFmt=f;
+  document.querySelectorAll('#fmtRow .filter-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.fmt===f);
   });
   render();
 }
@@ -359,7 +381,7 @@ render();
 
 // Check URL hash for pre-filter
 const hash=window.location.hash.slice(1);
-if(hash&&labels[hash]) setFilter(hash);
+if(hash&&labels[hash]) setCatFilter(hash);
 </script>
 </body>
 </html>
