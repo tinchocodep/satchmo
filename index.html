@@ -100,20 +100,6 @@ nav.s{background:rgba(247,246,243,.92);backdrop-filter:blur(20px);padding:16px 3
 /* IMGBREAK */
 .ib{width:100%;height:60vh;min-height:400px;overflow:hidden}.ib img{width:100%;height:100%;object-fit:cover}
 
-/* PRODUCTS */
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
-.fb{padding:7px 16px;border:none;background:transparent;font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:var(--text-s);cursor:pointer;transition:all .3s;border-bottom:1.5px solid transparent}.fb:hover{color:var(--text)}.fb.on{color:var(--text);border-bottom-color:var(--text)}
-.pg{display:grid;gap:1px;background:var(--mid)}
-.pc{background:var(--cream);overflow:hidden;transition:background .4s}.pc:hover{background:#fff}
-.pc__i{aspect-ratio:3/2;overflow:hidden;background:var(--mid)}.pc__i img{width:100%;height:100%;object-fit:cover;transition:transform 4s cubic-bezier(.16,1,.3,1)}.pc:hover .pc__i img{transform:scale(1.05)}
-.pc__b{padding:24px}.pc__n{font-family:var(--sans);font-size:14px;font-weight:500;margin-bottom:4px}
-.pc__d{font-family:var(--sans);font-size:13px;font-weight:300;color:var(--text-s);margin-bottom:14px}
-.pc__tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
-.tag{font-family:var(--sans);font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;color:#fff;border-radius:1px}
-.tag--f{background:var(--green)}.tag--p{background:var(--orange)}.tag--c{background:var(--blue)}
-.pc__lk{font-family:var(--sans);font-size:11px;letter-spacing:.06em;color:var(--accent);transition:color .3s}.pc__lk:hover{color:var(--text)}
-@media(min-width:640px){.pg{grid-template-columns:repeat(2,1fr)}}@media(min-width:1024px){.pg{grid-template-columns:repeat(3,1fr)}}
-.pcnt{font-family:var(--sans);font-size:12px;color:var(--text-s);margin-bottom:32px;font-weight:300}
 
 /* PROCESS */
 .steps{display:grid;gap:56px;margin-top:56px}
@@ -170,11 +156,11 @@ footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
 
 <nav id="nav">
   <a href="#" class="nl inv"><img src="img/logo.png" alt="Satchmo" class="nav-logo"></a>
-  <ul class="nk"><li><a href="#nosotros" class="inv">Nosotros</a></li><li><a href="#productos" class="inv">Productos</a></li><li><a href="#como-trabajamos" class="inv">Proceso</a></li><li><a href="#contacto" class="inv">Contacto</a></li></ul>
+  <ul class="nk"><li><a href="#nosotros" class="inv">Nosotros</a></li><li><a href="productos.html" class="inv">Productos</a></li><li><a href="#como-trabajamos" class="inv">Proceso</a></li><li><a href="#contacto" class="inv">Contacto</a></li></ul>
   <a href="https://wa.me/5491100000000?text=Hola%20Satchmo%2C%20quiero%20consultar%20sobre%20proveedur%C3%ADa." class="nw inv" target="_blank" rel="noopener">Escribinos →</a>
   <button class="nh inv" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
-<div class="mob" id="mob"><a href="#nosotros" onclick="cM()">Nosotros</a><a href="#productos" onclick="cM()">Productos</a><a href="#como-trabajamos" onclick="cM()">Proceso</a><a href="#contacto" onclick="cM()">Contacto</a><a href="https://wa.me/5491100000000" class="mwa" target="_blank" rel="noopener">Escribinos →</a></div>
+<div class="mob" id="mob"><a href="#nosotros" onclick="cM()">Nosotros</a><a href="productos.html" onclick="cM()">Productos</a><a href="#como-trabajamos" onclick="cM()">Proceso</a><a href="#contacto" onclick="cM()">Contacto</a><a href="https://wa.me/5491100000000" class="mwa" target="_blank" rel="noopener">Escribinos →</a></div>
 
 <!-- HERO -->
 <section class="hero">
@@ -229,19 +215,19 @@ footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
         <div class="fm__img"><img src="img/lines/sandwicheria.jpg" alt="Pan fresco" loading="lazy"></div>
         <div class="fm__t">Fresco</div>
         <p class="fm__p">Producción diaria. Sale de nuestra planta y llega a tu negocio en el día. Para los que sirven pan recién hecho y no negocian frescura.</p>
-        <a href="#productos" class="fm__lk">Ver productos →</a>
+        <a href="productos.html" class="fm__lk">Ver productos →</a>
       </div>
       <div class="fm">
         <div class="fm__img"><img src="img/lines/precocidos.jpg" alt="Pan pre-cocido" loading="lazy"></div>
         <div class="fm__t">Pre-cocido</div>
         <p class="fm__p">Llega al 80% de cocción. Lo terminás en tu horno en minutos. Aroma de panadería en tu local sin necesidad de un maestro panadero.</p>
-        <a href="#productos" class="fm__lk">Ver productos →</a>
+        <a href="productos.html" class="fm__lk">Ver productos →</a>
       </div>
       <div class="fm">
         <div class="fm__img"><img src="img/lines/varios.jpg" alt="Pan congelado" loading="lazy"></div>
         <div class="fm__t">Congelado</div>
         <p class="fm__p">Stock sin vencimiento inmediato. Activalo cuando lo necesites. Para operaciones que requieren planificación y control de merma.</p>
-        <a href="#productos" class="fm__lk">Ver productos →</a>
+        <a href="productos.html" class="fm__lk">Ver productos →</a>
       </div>
     </div>
   </div>
@@ -250,22 +236,6 @@ footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
 <!-- FULL BLEED IMAGE -->
 <div class="ib"><img src="img/process/equipo-masa.jpg" alt="Equipo trabajando masa" loading="lazy"></div>
 
-<!-- PRODUCTS -->
-<section class="sec" id="productos">
-  <div class="si">
-    <div data-a>
-      <p class="pre">Catálogo</p>
-      <h2 class="h2">42 productos pensados<br>para gastronomía</h2>
-      <p class="pp" style="margin-bottom:48px">Cada producto disponible en al menos un formato. Filtrá por categoría o formato.</p>
-    </div>
-    <div data-a data-d="1">
-      <div class="filters" id="cF"><button class="fb on" data-cat="todos">Todos</button><button class="fb" data-cat="hamburguesas">Hamburguesas</button><button class="fb" data-cat="panchos">Panchos</button><button class="fb" data-cat="sandwicheria">Sandwichería</button><button class="fb" data-cat="cafeteria">Cafetería</button><button class="fb" data-cat="precocidos">Pre-cocidos</button><button class="fb" data-cat="varios">Varios</button></div>
-      <div class="filters" id="fF"><button class="fb on" data-fmt="todos">Todos los formatos</button><button class="fb" data-fmt="fresco">Fresco</button><button class="fb" data-fmt="precocido">Pre-cocido</button><button class="fb" data-fmt="congelado">Congelado</button></div>
-      <p class="pcnt" id="pC"></p>
-    </div>
-    <div class="pg" id="pG" data-a data-d="2"></div>
-  </div>
-</section>
 
 <!-- GALLERY 2 -->
 <div class="gallery gal-3" data-a>
@@ -341,7 +311,7 @@ footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
   <div class="fi">
     <div class="fgr">
       <div><div class="flogo">Satchmo</div><p class="ftag">Proveeduría de panificados<br>para gastronomía<br>Buenos Aires, Argentina</p></div>
-      <div><div class="ft">Navegación</div><ul class="flk"><li><a href="#nosotros">Nosotros</a></li><li><a href="#productos">Productos</a></li><li><a href="#como-trabajamos">Cómo trabajamos</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+      <div><div class="ft">Navegación</div><ul class="flk"><li><a href="#nosotros">Nosotros</a></li><li><a href="productos.html">Productos</a></li><li><a href="#como-trabajamos">Cómo trabajamos</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
       <div><div class="ft">Contacto</div><ul class="flk"><li><a href="#">Teléfono: A confirmar</a></li><li><a href="#">Email: A confirmar</a></li><li><a href="#">Villa Lugano, Buenos Aires</a></li><li><a href="https://wa.me/5491100000000" target="_blank">WhatsApp</a></li></ul></div>
       <div><div class="ft">Nuestros locales</div><ul class="flk"><li><a href="https://mangini-web.vercel.app">Mangini Panaderías →</a></li><li><a href="#">Instagram</a></li></ul></div>
     </div>
@@ -352,111 +322,6 @@ footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
 <a href="https://wa.me/5491100000000?text=Hola%20Satchmo%2C%20quiero%20consultar." class="waf" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.48-.764-6.219-2.055l-.435-.334-2.998 1.005 1.005-2.998-.334-.435A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
 
 <script>
-// Product images mapped by product name
-const pImg={
-"Pan de Hamburguesa Clásico":"img/produ/DSC00710.jpg",
-"Pan de Hamburguesa Brioche":"img/produ/DSC00711.jpg",
-"Pan de Hamburguesa Integral":"img/produ/DSC00698.jpg",
-"Pan de Hamburguesa XL":"img/produ/DSC00701.jpg",
-"Pan de Hamburguesa Negro":"img/produ/DSC00698.jpg",
-"Pan de Hamburguesa Papa":"img/produ/DSC00635.jpg",
-"Pan de Pancho Clásico":"img/produ/DSC00084.jpg",
-"Pan de Pancho XL":"img/produ/DSC00279.jpg",
-"Pan de Pancho Brioche":"img/produ/DSC00266.jpg",
-"Pan de Miga Blanco":"img/produ/DSC00043.jpg",
-"Pan de Miga Negro":"img/produ/DSC00393.jpg",
-"Pan Árabe":"img/produ/DSC00097.jpg",
-"Baguette Clásica":"img/produ/DSC00625.jpg",
-"Ciabatta":"img/produ/DSC00609.jpg",
-"Focaccia":"img/produ/DSC00619.jpg",
-"Pan de Campo":"img/produ/DSC00643.jpg",
-"Medialuna de Manteca":"img/produ/DSC00415.jpg",
-"Medialuna de Grasa":"img/produ/DSC00460.jpg",
-"Facturas Surtidas":"img/produ/DSC00585.jpg",
-"Croissant":"img/produ/DSC00399.jpg",
-"Pain au Chocolat":"img/produ/DSC00570.jpg",
-"Scone":"img/produ/DSC00559.jpg",
-"Muffin":"img/produ/DSC00543.jpg",
-"Baguetín Pre-cocido":"img/produ/DSC00216.jpg",
-"Ciabattín Pre-cocido":"img/produ/DSC00632.jpg",
-"Pan Hamburguesa Pre-cocido":"img/produ/DSC00356.jpg",
-"Croissant Pre-cocido":"img/produ/DSC00344.jpg",
-"Medialuna Pre-cocida":"img/produ/DSC00128.jpg",
-"Focaccia Pre-cocida":"img/produ/DSC00619.jpg",
-"Pan Rallado":"img/produ/DSC00259.jpg",
-"Grisines":"img/produ/DSC00139.jpg",
-"Tostadas":"img/produ/DSC00609.jpg",
-"Pan de Molde Blanco":"img/produ/DSC00632.jpg",
-"Pan de Molde Integral":"img/produ/DSC00661.jpg",
-"Pan de Molde Multicereal":"img/produ/DSC00685.jpg",
-"Prepizza":"img/produ/DSC00097.jpg",
-"Masa de Empanada":"img/produ/DSC00060.jpg",
-"Tapas de Pascualina":"img/produ/DSC00323.jpg",
-"Pan Lactal":"img/produ/DSC00609.jpg",
-"Pan de Viena":"img/produ/DSC00082.jpg",
-"Chipá":"img/produ/DSC00474.jpg",
-"Pan Pebete":"img/produ/DSC00635.jpg",
-};
-const pIFallback="img/produ/DSC00698.jpg";
-
-const products=[
-{name:"Pan de Hamburguesa Clásico",desc:"120g, con sésamo",cat:"hamburguesas",fmt:["fresco","precocido","congelado"]},
-{name:"Pan de Hamburguesa Brioche",desc:"130g, manteca, textura suave",cat:"hamburguesas",fmt:["fresco","congelado"]},
-{name:"Pan de Hamburguesa Integral",desc:"120g, harina integral",cat:"hamburguesas",fmt:["fresco","congelado"]},
-{name:"Pan de Hamburguesa XL",desc:"160g, con sésamo",cat:"hamburguesas",fmt:["fresco","precocido","congelado"]},
-{name:"Pan de Hamburguesa Negro",desc:"120g, carbón vegetal",cat:"hamburguesas",fmt:["fresco","congelado"]},
-{name:"Pan de Hamburguesa Papa",desc:"130g, papa deshidratada",cat:"hamburguesas",fmt:["fresco","congelado"]},
-{name:"Pan de Pancho Clásico",desc:"Formato estándar",cat:"panchos",fmt:["fresco","precocido","congelado"]},
-{name:"Pan de Pancho XL",desc:"Formato extendido",cat:"panchos",fmt:["fresco","congelado"]},
-{name:"Pan de Pancho Brioche",desc:"Con manteca",cat:"panchos",fmt:["fresco","congelado"]},
-{name:"Pan de Miga Blanco",desc:"Para sándwiches de miga",cat:"sandwicheria",fmt:["fresco"]},
-{name:"Pan de Miga Negro",desc:"Pan integral de miga",cat:"sandwicheria",fmt:["fresco"]},
-{name:"Pan Árabe",desc:"Fino, para wraps y shawarma",cat:"sandwicheria",fmt:["fresco","congelado"]},
-{name:"Baguette Clásica",desc:"Corteza crocante, miga abierta",cat:"sandwicheria",fmt:["fresco","precocido","congelado"]},
-{name:"Ciabatta",desc:"Miga alveolada, corteza rústica",cat:"sandwicheria",fmt:["fresco","precocido","congelado"]},
-{name:"Focaccia",desc:"Aceite de oliva y sal gruesa",cat:"sandwicheria",fmt:["fresco","precocido"]},
-{name:"Pan de Campo",desc:"Miga compacta, ideal sándwich",cat:"sandwicheria",fmt:["fresco","precocido","congelado"]},
-{name:"Medialuna de Manteca",desc:"Hojaldrada, receta clásica",cat:"cafeteria",fmt:["fresco","precocido","congelado"]},
-{name:"Medialuna de Grasa",desc:"Textura suave, dulzor justo",cat:"cafeteria",fmt:["fresco","precocido","congelado"]},
-{name:"Facturas Surtidas",desc:"Mix de facturas variadas",cat:"cafeteria",fmt:["fresco","precocido"]},
-{name:"Croissant",desc:"Puro manteca, hojaldrado francés",cat:"cafeteria",fmt:["fresco","precocido","congelado"]},
-{name:"Pain au Chocolat",desc:"Chocolate belga, masa hojaldrada",cat:"cafeteria",fmt:["precocido","congelado"]},
-{name:"Scone",desc:"Tradicional inglés",cat:"cafeteria",fmt:["fresco","congelado"]},
-{name:"Muffin",desc:"Varios sabores disponibles",cat:"cafeteria",fmt:["fresco","congelado"]},
-{name:"Baguetín Pre-cocido",desc:"Para terminar en horno",cat:"precocidos",fmt:["precocido"]},
-{name:"Ciabattín Pre-cocido",desc:"Individual, para terminar",cat:"precocidos",fmt:["precocido"]},
-{name:"Pan Hamburguesa Pre-cocido",desc:"Solo necesita horno",cat:"precocidos",fmt:["precocido"]},
-{name:"Croissant Pre-cocido",desc:"Hojaldrado, terminar en 12min",cat:"precocidos",fmt:["precocido"]},
-{name:"Medialuna Pre-cocida",desc:"Manteca, terminar en 10min",cat:"precocidos",fmt:["precocido"]},
-{name:"Focaccia Pre-cocida",desc:"Lista para terminar y servir",cat:"precocidos",fmt:["precocido"]},
-{name:"Pan Rallado",desc:"Producción propia, sin conservantes",cat:"varios",fmt:["fresco"]},
-{name:"Grisines",desc:"Crocantes, varios sabores",cat:"varios",fmt:["fresco"]},
-{name:"Tostadas",desc:"Finas, ideales para gastronomía",cat:"varios",fmt:["fresco"]},
-{name:"Pan de Molde Blanco",desc:"Formato industrial",cat:"varios",fmt:["fresco","congelado"]},
-{name:"Pan de Molde Integral",desc:"Con semillas",cat:"varios",fmt:["fresco","congelado"]},
-{name:"Pan de Molde Multicereal",desc:"5 cereales y semillas",cat:"varios",fmt:["fresco","congelado"]},
-{name:"Prepizza",desc:"Base lista para armar",cat:"varios",fmt:["fresco","precocido","congelado"]},
-{name:"Masa de Empanada",desc:"Hojaldre o criolla",cat:"varios",fmt:["fresco","congelado"]},
-{name:"Tapas de Pascualina",desc:"Para tartas",cat:"varios",fmt:["fresco","congelado"]},
-{name:"Pan Lactal",desc:"Textura suave, sin corteza dura",cat:"varios",fmt:["fresco","congelado"]},
-{name:"Pan de Viena",desc:"Clásico porteño",cat:"varios",fmt:["fresco","precocido"]},
-{name:"Chipá",desc:"Almidón de mandioca, queso",cat:"varios",fmt:["fresco","congelado"]},
-{name:"Pan Pebete",desc:"Miga suave, para sándwich",cat:"sandwicheria",fmt:["fresco","precocido","congelado"]}
-];
-
-let aC='todos',aF='todos';
-function render(){
-  const f=products.filter(p=>(aC==='todos'||p.cat===aC)&&(aF==='todos'||p.fmt.includes(aF)));
-  document.getElementById('pC').textContent=`${f.length} producto${f.length!==1?'s':''}`;
-  document.getElementById('pG').innerHTML=f.map((p,i)=>{
-    const img=pImg[p.name]||pIFallback;
-    const tags=p.fmt.map(t=>`<span class="tag tag--${t==='fresco'?'f':t==='precocido'?'p':'c'}">${t==='fresco'?'Fresco':t==='precocido'?'Pre-cocido':'Congelado'}</span>`).join('');
-    return`<div class="pc"><div class="pc__i"><img src="${img}" alt="${p.name}" loading="lazy"></div><div class="pc__b"><div class="pc__n">${p.name}</div><div class="pc__d">${p.desc}</div><div class="pc__tags">${tags}</div><a href="https://wa.me/5491100000000?text=${encodeURIComponent(`Hola, quiero consultar por ${p.name}.`)}" class="pc__lk" target="_blank">Consultar →</a></div></div>`
-  }).join('')}
-document.getElementById('cF').addEventListener('click',e=>{if(!e.target.classList.contains('fb'))return;document.querySelectorAll('#cF .fb').forEach(b=>b.classList.remove('on'));e.target.classList.add('on');aC=e.target.dataset.cat;render()});
-document.getElementById('fF').addEventListener('click',e=>{if(!e.target.classList.contains('fb'))return;document.querySelectorAll('#fF .fb').forEach(b=>b.classList.remove('on'));e.target.classList.add('on');aF=e.target.dataset.fmt;render()});
-render();
-
 // NAV
 const nv=document.getElementById('nav');
 window.addEventListener('scroll',()=>{nv.classList.toggle('s',scrollY>80);const inv=scrollY<=80;document.querySelectorAll('.nl,.nk a,.nw').forEach(el=>el.classList.toggle('inv',inv));document.querySelector('.nh')?.classList.toggle('inv',inv)});
