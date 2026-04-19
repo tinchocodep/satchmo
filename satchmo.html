@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Satchmo — Proveeduría de panificados para gastronomía | Buenos Aires</title>
+<meta name="description" content="Pan fresco, pre-cocido y congelado para tu negocio gastronómico. +20 años abasteciendo restaurantes, bares y hoteles en CABA y GBA.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --dark:#0f0f0f;--cream:#f7f6f3;--mid:#e8e6e1;--accent:#b8975a;--accent-light:#d4b87a;
+  --text:#1a1a1a;--text-s:#888;--text-inv:#f7f6f3;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:'Outfit',system-ui,sans-serif;
+  --green:#6b8f71;--orange:#c4956a;--blue:#7b9bb8;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--text);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}[data-a]{opacity:1!important;transform:none!important}}
+::selection{background:var(--accent);color:#fff}
+img{display:block;max-width:100%}a{color:inherit;text-decoration:none}
+
+[data-a]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+[data-a].v{opacity:1;transform:none}
+[data-a][data-d="1"]{transition-delay:.12s}[data-a][data-d="2"]{transition-delay:.24s}[data-a][data-d="3"]{transition-delay:.36s}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:10px 24px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(247,246,243,.92);backdrop-filter:blur(20px);padding:8px 24px}
+.nl{display:flex;align-items:center;overflow:visible}.nav-logo{height:44px;width:auto;transition:all .4s;position:relative;z-index:101}
+nav.s .nav-logo{height:38px}
+.nk{display:none;gap:36px;list-style:none}
+.nk a{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--text);opacity:.5;transition:opacity .3s}.nk a.inv{color:var(--text-inv)}nav.s .nk a{color:var(--text)!important}.nk a:hover{opacity:1}
+.nw{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--text);opacity:.5;transition:opacity .3s;display:none}.nw.inv{color:var(--text-inv)}nav.s .nw{color:var(--text)!important}.nw:hover{opacity:1}
+.nh{display:flex;flex-direction:column;gap:6px;background:none;border:none;cursor:pointer;padding:6px}
+.nh span{width:22px;height:1px;background:var(--text);transition:all .4s}.nh.inv span{background:var(--text-inv)}nav.s .nh span{background:var(--text)!important}
+.nh.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px)}.nh.open span:nth-child(2){opacity:0}.nh.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px)}
+@media(min-width:900px){.nk{display:flex}.nw{display:block}.nh{display:none}nav{padding:12px 40px}nav.s{padding:8px 40px}}
+.mob{position:fixed;inset:0;z-index:99;background:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:28px;opacity:0;pointer-events:none;transition:opacity .4s}
+.mob.open{opacity:1;pointer-events:auto}.mob a{font-family:var(--serif);font-size:32px;font-weight:300;color:var(--text)}.mob .mwa{font-family:var(--sans);font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-top:20px}
+
+/* HERO */
+.hero{position:relative;height:100vh;min-height:640px;overflow:hidden;display:flex;align-items:flex-end}
+.hero__img{position:absolute;inset:0;background:url('img/hero/hero.jpg') center/cover}
+.hero__ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,15,15,.72) 0%,rgba(15,15,15,.12) 50%,rgba(15,15,15,.25) 100%)}
+.hero__c{position:relative;z-index:2;padding:0 32px 72px;width:100%;max-width:900px}
+.hero__pre{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,246,243,.45);margin-bottom:24px;opacity:0;animation:fu .8s .4s forwards}
+.hero__h1{font-family:var(--serif);font-size:clamp(38px,7vw,74px);font-weight:300;color:var(--text-inv);line-height:1.08;margin-bottom:20px;opacity:0;animation:fu .8s .6s forwards}.hero__h1 em{font-style:italic}
+.hero__sub{font-family:var(--sans);font-size:15px;font-weight:300;color:rgba(247,246,243,.6);line-height:1.75;max-width:440px;margin-bottom:40px;opacity:0;animation:fu .8s .8s forwards}
+.hcta{display:inline-flex;align-items:center;gap:10px;padding:14px 0;font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--text-inv);border-bottom:1px solid rgba(247,246,243,.3);transition:all .4s;opacity:0;animation:fu .8s 1s forwards}
+.hcta:hover{border-color:var(--accent);color:var(--accent)}.hcta svg{width:16px;height:16px;transition:transform .3s}.hcta:hover svg{transform:translateX(4px)}
+.hscr{position:absolute;bottom:32px;right:32px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px;opacity:0;animation:fu .8s 1.3s forwards}
+.hscr span{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,246,243,.25);writing-mode:vertical-lr}
+.scrl{width:1px;height:40px;background:rgba(247,246,243,.12);overflow:hidden;position:relative}.scrl::after{content:'';position:absolute;left:0;width:100%;height:100%;background:var(--accent);animation:sl 2.2s infinite}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes sl{0%{top:-100%}50%{top:100%}100%{top:100%}}
+@media(min-width:900px){.hero__c{padding:0 48px 96px}}
+
+/* STATS */
+.stats{padding:56px 32px;border-bottom:1px solid var(--mid)}
+.stats__inner{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:repeat(2,1fr);gap:32px}
+.st-n{font-family:var(--serif);font-size:clamp(36px,5vw,56px);font-weight:300;color:var(--text);line-height:1;text-align:center}
+.st-l{font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-s);margin-top:8px;text-align:center}
+@media(min-width:768px){.stats__inner{grid-template-columns:repeat(4,1fr)}.stats{padding:72px 48px}}
+
+/* SECTIONS */
+.sec{padding:100px 32px}.sec--d{background:var(--dark);color:var(--text-inv)}
+.si{max-width:1000px;margin:0 auto}
+.pre{font-family:var(--sans);font-size:11px;font-weight:400;letter-spacing:.2em;text-transform:uppercase;color:var(--text-s);margin-bottom:20px}.sec--d .pre{color:rgba(247,246,243,.3)}
+.h2{font-family:var(--serif);font-size:clamp(28px,4.5vw,48px);font-weight:300;line-height:1.2;margin-bottom:20px}
+.pp{font-family:var(--sans);font-size:15px;font-weight:300;line-height:1.8;color:var(--text-s);max-width:520px}.sec--d .pp{color:rgba(247,246,243,.5)}.pp+.pp{margin-top:16px}
+@media(min-width:900px){.sec{padding:140px 48px}}
+
+/* ABOUT */
+.about{display:grid;gap:48px}
+.about__imgs{display:grid;gap:1px;background:var(--mid)}
+.about__imgs .ai{overflow:hidden}.about__imgs .ai img{width:100%;height:100%;object-fit:cover;transition:transform 6s cubic-bezier(.16,1,.3,1)}.about__imgs .ai:hover img{transform:scale(1.04)}
+.about__imgs .ai:first-child{aspect-ratio:4/3}
+.about__imgs .ai:nth-child(2){aspect-ratio:4/3}
+@media(min-width:768px){.about{grid-template-columns:1fr 1fr;gap:80px;align-items:center}.about__imgs{grid-template-columns:1fr 1fr}}
+
+/* FORMATS */
+.fmts{display:grid;gap:1px;margin-top:64px;background:var(--mid)}
+.fm{background:var(--cream);padding:40px 32px;transition:background .4s}.fm:hover{background:#fff}
+.fm__img{aspect-ratio:16/9;overflow:hidden;margin-bottom:20px}.fm__img img{width:100%;height:100%;object-fit:cover;transition:transform 4s cubic-bezier(.16,1,.3,1)}.fm:hover .fm__img img{transform:scale(1.04)}
+.fm__t{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.fm__p{font-family:var(--sans);font-size:14px;font-weight:300;line-height:1.75;color:var(--text-s);margin-bottom:16px}
+.fm__lk{font-family:var(--sans);font-size:12px;letter-spacing:.08em;color:var(--accent);display:inline-flex;align-items:center;gap:6px;transition:gap .3s}.fm__lk:hover{gap:10px}
+@media(min-width:768px){.fmts{grid-template-columns:repeat(3,1fr)}}
+
+/* PHOTO GALLERY */
+.gallery{display:grid;gap:1px;background:var(--mid)}
+.gallery .gi{overflow:hidden}.gallery .gi img{width:100%;height:100%;object-fit:cover;transition:transform 5s cubic-bezier(.16,1,.3,1)}.gallery .gi:hover img{transform:scale(1.05)}
+.gal-2{grid-template-columns:1fr 1fr}.gal-2 .gi{aspect-ratio:3/2}
+.gal-3{grid-template-columns:1fr 1fr 1fr}.gal-3 .gi{aspect-ratio:4/3}
+.gal-hero{grid-template-columns:1fr 1fr}.gal-hero .gi{aspect-ratio:3/2}
+@media(max-width:767px){.gal-2,.gal-3,.gal-hero{grid-template-columns:1fr}}
+
+/* IMGBREAK */
+.ib{width:100%;height:60vh;min-height:400px;overflow:hidden}.ib img{width:100%;height:100%;object-fit:cover}
+
+
+/* PROCESS */
+.steps{display:grid;gap:56px;margin-top:56px}
+.sn{font-family:var(--serif);font-size:clamp(48px,6vw,80px);font-weight:300;color:var(--accent);opacity:.25;line-height:1;margin-bottom:12px}
+.st{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:var(--text-inv);margin-bottom:12px}
+.sp{font-family:var(--sans);font-size:14px;font-weight:300;line-height:1.8;color:rgba(247,246,243,.5);max-width:340px}
+@media(min-width:768px){.steps{grid-template-columns:repeat(3,1fr);gap:40px}}
+.od{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:64px;padding-top:40px;border-top:1px solid rgba(255,255,255,.07)}
+.od__l{font-family:var(--sans);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(247,246,243,.3);margin-bottom:4px}
+.od__v{font-family:var(--sans);font-size:13px;font-weight:300;color:rgba(247,246,243,.6)}
+@media(min-width:768px){.od{grid-template-columns:repeat(4,1fr)}}
+
+/* VALIDATION */
+.val{position:relative;padding:120px 32px;overflow:hidden}
+.val__i{position:absolute;inset:0}.val__i img{width:100%;height:100%;object-fit:cover}
+.val__o{position:absolute;inset:0;background:rgba(15,15,15,.62)}
+.val__c{position:relative;z-index:2;max-width:640px;margin:0 auto;text-align:center}
+.val__pre{font-family:var(--sans);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(247,246,243,.35);margin-bottom:24px}
+.val__h2{font-family:var(--serif);font-size:clamp(26px,4vw,42px);font-weight:300;color:var(--text-inv);line-height:1.3;margin-bottom:20px}
+.val__p{font-family:var(--sans);font-size:14px;font-weight:300;line-height:1.8;color:rgba(247,246,243,.55);margin-bottom:40px}
+.val__cta{display:inline-flex;align-items:center;gap:8px;padding:12px 0;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text-inv);border-bottom:1px solid rgba(247,246,243,.25);transition:all .4s}.val__cta:hover{border-color:var(--accent);color:var(--accent)}
+@media(min-width:900px){.val{padding:160px 48px}}
+
+/* CONTACT */
+.cg{display:grid;gap:56px}
+.cwa{display:inline-flex;align-items:center;gap:10px;padding:14px 0;font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);border-bottom:1px solid var(--accent);transition:all .3s;margin-bottom:24px}.cwa:hover{color:var(--text);border-color:var(--text)}
+.cdet{font-family:var(--sans);font-size:13px;font-weight:300;color:var(--text-s);line-height:2.2}
+.fg{margin-bottom:20px}.fg label{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--text-s);margin-bottom:8px}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 0;border:none;border-bottom:1px solid var(--mid);background:transparent;font-family:var(--sans);font-size:14px;font-weight:300;color:var(--text);transition:border-color .3s;border-radius:0;-webkit-appearance:none}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--text)}.fg textarea{min-height:80px;resize:vertical}
+.fr{display:grid;gap:20px}
+.cbs{display:flex;flex-wrap:wrap;gap:12px}
+.cb{display:flex;align-items:center;gap:6px;font-family:var(--sans);font-size:13px;font-weight:300;cursor:pointer}.cb input{accent-color:var(--accent)}
+.fbtn{padding:14px 0;background:transparent;border:none;border-bottom:1px solid var(--text);font-family:var(--sans);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--text);cursor:pointer;transition:all .3s}.fbtn:hover{border-color:var(--accent);color:var(--accent)}
+.fnote{font-family:var(--sans);font-size:12px;color:var(--text-s);margin-top:16px;font-weight:300}
+@media(min-width:768px){.cg{grid-template-columns:1fr 1fr;gap:80px;align-items:start}.fr{grid-template-columns:1fr 1fr}}
+
+/* FOOTER */
+footer{background:var(--dark);color:var(--text-inv);padding:64px 32px 32px}
+.fi{max-width:1000px;margin:0 auto}.fgr{display:grid;gap:40px;margin-bottom:56px}
+.ft{font-family:var(--sans);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:rgba(247,246,243,.3);margin-bottom:14px}
+.flogo{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.25em;text-transform:uppercase;margin-bottom:10px}
+.ftag{font-family:var(--sans);font-size:13px;font-weight:300;color:rgba(247,246,243,.4);line-height:1.6}
+.flk{list-style:none}.flk li+li{margin-top:10px}.flk a{font-family:var(--sans);font-size:13px;font-weight:300;color:rgba(247,246,243,.45);transition:color .3s}.flk a:hover{color:var(--accent)}
+.fbot{border-top:1px solid rgba(255,255,255,.06);padding-top:24px;font-family:var(--sans);font-size:11px;font-weight:300;color:rgba(247,246,243,.2)}
+@media(min-width:768px){.fgr{grid-template-columns:2fr 1fr 1fr 1fr}footer{padding:80px 48px 32px}}
+
+/* WA */
+.waf{position:fixed;bottom:28px;right:28px;z-index:90;width:52px;height:52px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 24px rgba(184,151,90,.3);transition:transform .3s}.waf:hover{transform:scale(1.08)}.waf svg{width:24px;height:24px;fill:#fff}
+@media(max-width:767px){.waf{width:48px;height:48px;bottom:20px;right:20px}}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nl inv"><img src="img/logo.png" alt="Satchmo" class="nav-logo"></a>
+  <ul class="nk"><li><a href="#nosotros" class="inv">Nosotros</a></li><li><a href="productos.html" class="inv">Productos</a></li><li><a href="#como-trabajamos" class="inv">Proceso</a></li><li><a href="#contacto" class="inv">Contacto</a></li></ul>
+  <a href="https://wa.me/5491100000000?text=Hola%20Satchmo%2C%20quiero%20consultar%20sobre%20proveedur%C3%ADa." class="nw inv" target="_blank" rel="noopener">Escribinos →</a>
+  <button class="nh inv" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob" id="mob"><a href="#nosotros" onclick="cM()">Nosotros</a><a href="productos.html" onclick="cM()">Productos</a><a href="#como-trabajamos" onclick="cM()">Proceso</a><a href="#contacto" onclick="cM()">Contacto</a><a href="https://wa.me/5491100000000" class="mwa" target="_blank" rel="noopener">Escribinos →</a></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero__img"></div>
+  <div class="hero__ov"></div>
+  <div class="hero__c">
+    <p class="hero__pre">Proveeduría de panificados para gastronomía</p>
+    <h1 class="hero__h1">Tu negocio no puede parar.<br><em>Tu pan tampoco.</em></h1>
+    <p class="hero__sub">Pan fresco, pre-cocido y congelado. Tres formatos, un proveedor. +20 años abasteciendo gastronomía en Buenos Aires.</p>
+    <a href="https://wa.me/5491100000000?text=Hola%2C%20quiero%20consultar%20condiciones%20mayoristas." class="hcta" target="_blank" rel="noopener">Consultá condiciones mayoristas <svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+  <div class="hscr"><span>Scroll</span><div class="scrl"></div></div>
+</section>
+
+<!-- STATS -->
+<section class="stats" data-a>
+  <div class="stats__inner">
+    <div><div class="st-n">+220</div><div class="st-l">Productos</div></div>
+    <div><div class="st-n">+20</div><div class="st-l">Años en el mercado</div></div>
+    <div><div class="st-n">5</div><div class="st-l">Locales propios Mangini</div></div>
+    <div><div class="st-n">160</div><div class="st-l">Personas en planta</div></div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY 1 -->
+<div class="gallery gal-hero" data-a>
+  <div class="gi"><img src="img/produ/DSC00259.jpg" alt="Masa cortada" loading="lazy"></div>
+  <div class="gi"><img src="img/produ/DSC00082.jpg" alt="Rack de panes" loading="lazy"></div>
+  <div class="gi"><img src="img/produ/DSC00375.jpg" alt="Equipo trabajando" loading="lazy"></div>
+  <div class="gi"><img src="img/produ/DSC00488.jpg" alt="Pastelería" loading="lazy"></div>
+</div>
+
+<!-- NOSOTROS -->
+<section class="sec" id="nosotros">
+  <div class="si">
+    <div class="about">
+      <div data-a>
+        <p class="pre">Por qué existimos</p>
+        <h2 class="h2">¿Cuántas veces cambiaste de proveedor de pan?</h2>
+        <p class="pp">Falta de stock. Inconsistencia entre lotes. Entregas que no llegan. Si tu operación depende del pan, esos problemas definen tu día a día.</p>
+        <p class="pp">Satchmo es una planta industrial con 160 personas que produce los 365 días del año. No somos una panadería que vende excedente. Somos un proveedor diseñado para que tu negocio nunca se quede sin producto.</p>
+      </div>
+      <div class="about__imgs" data-a data-d="2">
+        <div class="ai"><img src="img/about/produccion-equipo.jpg" alt="Equipo de producción" loading="lazy"></div>
+        <div class="ai"><img src="img/about/artesanal.jpg" alt="Producción artesanal" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- FORMATS WITH PHOTOS -->
+    <div class="fmts" data-a>
+      <div class="fm">
+        <div class="fm__img"><img src="img/lines/sandwicheria.jpg" alt="Pan fresco" loading="lazy"></div>
+        <div class="fm__t">Fresco</div>
+        <p class="fm__p">Producción diaria. Sale de nuestra planta y llega a tu negocio en el día. Para los que sirven pan recién hecho y no negocian frescura.</p>
+        <a href="productos.html" class="fm__lk">Ver productos →</a>
+      </div>
+      <div class="fm">
+        <div class="fm__img"><img src="img/lines/precocidos.jpg" alt="Pan pre-cocido" loading="lazy"></div>
+        <div class="fm__t">Pre-cocido</div>
+        <p class="fm__p">Llega al 80% de cocción. Lo terminás en tu horno en minutos. Aroma de panadería en tu local sin necesidad de un maestro panadero.</p>
+        <a href="productos.html" class="fm__lk">Ver productos →</a>
+      </div>
+      <div class="fm">
+        <div class="fm__img"><img src="img/lines/varios.jpg" alt="Pan congelado" loading="lazy"></div>
+        <div class="fm__t">Congelado</div>
+        <p class="fm__p">Stock sin vencimiento inmediato. Activalo cuando lo necesites. Para operaciones que requieren planificación y control de merma.</p>
+        <a href="productos.html" class="fm__lk">Ver productos →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FULL BLEED IMAGE -->
+<div class="ib"><img src="img/process/equipo-masa.jpg" alt="Equipo trabajando masa" loading="lazy"></div>
+
+
+<!-- GALLERY 2 -->
+<div class="gallery gal-3" data-a>
+  <div class="gi"><img src="img/process/croissants-mano.jpg" alt="Croissants hechos a mano" loading="lazy"></div>
+  <div class="gi"><img src="img/process/moldeando.jpg" alt="Moldeando pan" loading="lazy"></div>
+  <div class="gi"><img src="img/process/rack-panchos.jpg" alt="Rack de panchos" loading="lazy"></div>
+</div>
+
+<!-- PROCESO -->
+<section class="sec sec--d" id="como-trabajamos">
+  <div class="si">
+    <div data-a>
+      <p class="pre">Proceso</p>
+      <h2 class="h2">Empezar es más simple de lo que pensás</h2>
+      <p class="pp">Sin contratos largos. Sin mínimos inalcanzables. Tres pasos y ya tenés producto en tu negocio.</p>
+    </div>
+    <div class="steps" data-a>
+      <div><div class="sn">01</div><div class="st">Consultá</div><p class="sp">Escribinos por WhatsApp o completá el formulario. Contanos qué tipo de negocio tenés, qué volumen manejás y qué formato necesitás. Te respondemos en menos de 24 horas.</p></div>
+      <div><div class="sn">02</div><div class="st">Armamos tu pedido</div><p class="sp">Definimos productos, formatos y frecuencia de entrega. ¿Pan fresco todos los días? ¿Congelado una vez por semana? Lo armamos a medida de tu operación.</p></div>
+      <div><div class="sn">03</div><div class="st">Entregamos o retirás</div><p class="sp">Envío propio en CABA y GBA. O retirá en cualquiera de nuestros 5 puntos Mangini. Vos elegís lo que funcione mejor para tu logística.</p></div>
+    </div>
+    <div class="od" data-a>
+      <div><div class="od__l">Pedido mínimo</div><div class="od__v">A confirmar</div></div>
+      <div><div class="od__l">Frecuencia</div><div class="od__v">Diaria, semanal o a medida</div></div>
+      <div><div class="od__l">Zona de entrega</div><div class="od__v">CABA y GBA</div></div>
+      <div><div class="od__l">Formas de pago</div><div class="od__v">A confirmar</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALIDATION -->
+<section class="val">
+  <div class="val__i"><img src="img/about/produccion-equipo.jpg" alt="Equipo Satchmo" loading="lazy"></div>
+  <div class="val__o"></div>
+  <div class="val__c" data-a>
+    <p class="val__pre">Validación Mangini — Red de locales propios</p>
+    <h2 class="val__h2">Todo lo que vendemos a tu negocio, lo servimos primero en los nuestros.</h2>
+    <p class="val__p">5 locales. Miles de clientes cada día. Si un producto no convence en nuestro mostrador, no llega al tuyo. No te estamos vendiendo desde un catálogo. Te estamos ofreciendo lo que ya probamos, ajustamos y validamos en una operación real.</p>
+    <a href="https://www.instagram.com/mangini.bsas/" target="_blank" rel="noopener" class="val__cta">Seguí Mangini en Instagram <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+</section>
+
+<!-- GALLERY 3 -->
+<div class="gallery gal-2" data-a>
+  <div class="gi"><img src="img/products/panes-variados-2.jpg" alt="Panes variados" loading="lazy"></div>
+  <div class="gi"><img src="img/products/pan-masa-madre.jpg" alt="Pan de masa madre" loading="lazy"></div>
+</div>
+
+<!-- CONTACTO -->
+<section class="sec" id="contacto">
+  <div class="si">
+    <div class="cg">
+      <div data-a>
+        <p class="pre">Contacto</p>
+        <h2 class="h2">¿Necesitás un proveedor que no falle?</h2>
+        <p class="pp" style="margin-bottom:40px">Escribinos y en menos de 24 horas tenés una propuesta armada para tu negocio. Sin compromiso, sin letra chica.</p>
+        <a href="https://wa.me/5491100000000?text=Hola%20Satchmo%2C%20tengo%20un%20negocio%20gastron%C3%B3mico%20y%20quiero%20consultar." class="cwa" target="_blank" rel="noopener">Escribinos por WhatsApp →</a>
+        <div class="cdet"><p>Teléfono: A confirmar</p><p>Email: A confirmar</p><p>Planta: Villa Lugano, Buenos Aires</p></div>
+      </div>
+      <div data-a data-d="2">
+        <div class="fr"><div class="fg"><label>Nombre y apellido</label><input type="text" id="fn" placeholder="Tu nombre"></div><div class="fg"><label>Nombre del negocio</label><input type="text" id="bn" placeholder="Nombre de tu local"></div></div>
+        <div class="fr"><div class="fg"><label>Segmento</label><select id="bt"><option value="">Seleccioná</option><option>Buffets y Cafeterías</option><option>Hamburgueserías y Cervecerías</option><option>Hotelería</option><option>Catering y Eventos</option><option>Canchas y Clubes</option><option>Restaurantes</option><option>Panaderías y Distribuidores</option><option>Otro</option></select></div><div class="fg"><label>Formato preferido</label><select id="ff"><option value="">Seleccioná</option><option>Crudo</option><option>Horneado</option><option>Pre-cocido</option><option>Congelado</option><option>Todos</option></select></div></div>
+        <div class="fr"><div class="fg"><label>Email</label><input type="email" id="em" placeholder="tu@email.com"></div><div class="fg"><label>Zona de entrega</label><input type="text" id="zn" placeholder="CABA / GBA / Zona sur..."></div></div>
+        <div class="fg"><label>Productos de interés</label><div class="cbs"><label class="cb"><input type="checkbox" value="Panes de Viena (hamburguesas, panchos, pebetes)"> Panes de Viena</label><label class="cb"><input type="checkbox" value="Panes Especiales (lactal, chapatta, figaza)"> Panes Especiales</label><label class="cb"><input type="checkbox" value="Facturas y Bollería"> Facturas y Bollería</label><label class="cb"><input type="checkbox" value="Pastelería y Tortas"> Pastelería y Tortas</label><label class="cb"><input type="checkbox" value="Empanadas y Tartas"> Empanadas y Tartas</label><label class="cb"><input type="checkbox" value="Línea Congelado"> Línea Congelado</label></div></div>
+        <div class="fg"><label>Mensaje (opcional)</label><textarea id="ms" placeholder="Contanos qué necesitás..."></textarea></div>
+        <button type="button" class="fbtn" onclick="sendForm()">Enviar consulta →</button>
+        <p class="fnote">Te respondemos en menos de 24 horas hábiles.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div class="fgr">
+      <div><div class="flogo">Satchmo</div><p class="ftag">Proveeduría de panificados<br>para gastronomía<br>Buenos Aires, Argentina</p></div>
+      <div><div class="ft">Navegación</div><ul class="flk"><li><a href="#nosotros">Nosotros</a></li><li><a href="productos.html">Productos</a></li><li><a href="#como-trabajamos">Cómo trabajamos</a></li><li><a href="#contacto">Contacto</a></li></ul></div>
+      <div><div class="ft">Contacto</div><ul class="flk"><li><a href="#">Teléfono: A confirmar</a></li><li><a href="#">Email: A confirmar</a></li><li><a href="#">Villa Lugano, Buenos Aires</a></li><li><a href="https://wa.me/5491100000000" target="_blank">WhatsApp</a></li></ul></div>
+      <div><div class="ft">Nuestros locales</div><ul class="flk"><li><a href="https://www.instagram.com/mangini.bsas/" target="_blank" rel="noopener">Mangini Panaderías →</a></li><li><a href="https://www.instagram.com/mangini.bsas/" target="_blank" rel="noopener">Instagram @mangini.bsas</a></li></ul></div>
+    </div>
+    <div class="fbot">© 2026 Satchmo — Panificadora Satchmo S.A. | Todos los derechos reservados.</div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5491100000000?text=Hola%20Satchmo%2C%20quiero%20consultar." class="waf" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.625.846 5.059 2.284 7.034L.789 23.492a.5.5 0 00.611.611l4.458-1.495A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-2.326 0-4.48-.764-6.219-2.055l-.435-.334-2.998 1.005 1.005-2.998-.334-.435A9.96 9.96 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg></a>
+
+<script>
+// NAV
+const nv=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nv.classList.toggle('s',scrollY>80);const inv=scrollY<=80;document.querySelectorAll('.nl,.nk a,.nw').forEach(el=>el.classList.toggle('inv',inv));document.querySelector('.nh')?.classList.toggle('inv',inv)});
+
+// MOBILE
+const ham=document.getElementById('ham'),mob=document.getElementById('mob');
+ham.addEventListener('click',()=>{ham.classList.toggle('open');mob.classList.toggle('open');document.body.style.overflow=mob.classList.contains('open')?'hidden':''});
+function cM(){ham.classList.remove('open');mob.classList.remove('open');document.body.style.overflow=''}
+
+// ANIM
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');obs.unobserve(e.target)}})},{threshold:.1});
+document.querySelectorAll('[data-a]').forEach(el=>obs.observe(el));
+setTimeout(()=>{document.querySelectorAll('[data-a]').forEach(el=>el.classList.add('v'))},3000);
+
+// FORM
+function sendForm(){
+  const g = id => document.getElementById(id).value;
+  const n=g('fn'), b=g('bn'), t=g('bt'), f=g('ff'), em=g('em'), zn=g('zn'), m=g('ms');
+  const c=[...document.querySelectorAll('.cbs input:checked')].map(x=>x.value).join(', ');
+  const txt = `Hola Satchmo, consulta:\n\nNombre: ${n}\nNegocio: ${b}\nSegmento: ${t}\nEmail: ${em}\nZona: ${zn}\nFormato: ${f}\nProductos: ${c}\nMensaje: ${m}`;
+  window.open(`https://wa.me/5491100000000?text=${encodeURIComponent(txt)}`,'_blank');
+}
+</script>
+</body>
+</html>
