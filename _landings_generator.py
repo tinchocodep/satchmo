@@ -333,11 +333,12 @@ ARROW_SVG = '<svg viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" 
 def render_product_card(name, cat_label, cat_slug):
     wa_text = f"Hola Satchmo, consulto por {name}"
     wa_url = "https://wa.me/5491126952459?text=" + _url_encode(wa_text)
-    return f"""      <a class="pcard" href="{wa_url}" target="_blank" rel="noopener">
-        <div class="pcat">{html.escape(cat_label)}</div>
+    cat_link = f"productos.html#{cat_slug}"
+    return f"""      <div class="pcard">
+        <a class="pcat" href="{cat_link}">{html.escape(cat_label)}</a>
         <div class="pn">{html.escape(name)}</div>
-        <span class="plk">Pedir muestra {ARROW_SVG}</span>
-      </a>"""
+        <a class="plk" href="{wa_url}" target="_blank" rel="noopener">Pedir muestra {ARROW_SVG}</a>
+      </div>"""
 
 
 def render_form_field(fid, label, ftype, placeholder_or_options):
@@ -478,7 +479,7 @@ def render_landing(slug, d):
       <div><div class="flogo">Satchmo</div><p class="ftag">Proveeduría de panificados<br>para gastronomía<br>Buenos Aires, Argentina</p></div>
       <div><div class="ft">Navegación</div><ul class="flk"><li><a href="satchmo.html#nosotros">Nosotros</a></li><li><a href="productos.html">Catálogo</a></li><li><a href="satchmo.html#como-trabajamos">Proceso</a></li><li><a href="satchmo.html#contacto">Contacto</a></li></ul></div>
       <div><div class="ft">Segmentos</div><ul class="flk"><li><a href="buffets-cafeterias.html">Buffets y cafeterías</a></li><li><a href="hamburgueserias.html">Hamburgueserías</a></li><li><a href="hoteles.html">Hoteles</a></li><li><a href="catering.html">Catering</a></li></ul></div>
-      <div><div class="ft">Contacto</div><ul class="flk"><li><a href="https://wa.me/5491126952459" target="_blank">WhatsApp</a></li><li><a href="mailto:hola@satchmo.com.ar">hola@satchmo.com.ar</a></li></ul></div>
+      <div><div class="ft">Contacto</div><ul class="flk"><li><a href="https://wa.me/5491126952459" target="_blank">WhatsApp</a></li><li><a href="mailto:tinchocabrera100@gmail.com">tinchocabrera100@gmail.com</a></li></ul></div>
     </div>
     <div class="fbot">© 2026 Satchmo — Panificadora Satchmo S.A.</div>
   </div>
