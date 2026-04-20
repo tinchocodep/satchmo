@@ -392,8 +392,8 @@ def render_landing(slug, d):
 <body>
 
 <nav id="nav">
-  <a href="satchmo.html" class="nl inv"><img src="img/logo.png" alt="Satchmo" class="nav-logo"></a>
-  <ul class="nk"><li><a href="satchmo.html#nosotros" class="inv">Nosotros</a></li><li><a href="productos.html" class="inv">Catálogo</a></li><li><a href="satchmo.html#como-trabajamos" class="inv">Proceso</a></li><li><a href="#contacto" class="inv">Contacto</a></li></ul>
+  <a href="index.html" class="nl inv"><img src="img/logo.png" alt="Satchmo" class="nav-logo"></a>
+  <ul class="nk"><li><a href="index.html#nosotros" class="inv">Nosotros</a></li><li><a href="productos.html" class="inv">Catálogo</a></li><li><a href="index.html#como-trabajamos" class="inv">Proceso</a></li><li><a href="#contacto" class="inv">Contacto</a></li></ul>
   <button class="nh inv" id="ham" aria-label="Menú"><span></span><span></span><span></span></button>
 </nav>
 
@@ -410,7 +410,7 @@ def render_landing(slug, d):
 </section>
 
 <!-- BREADCRUMB -->
-<div class="bc"><a href="satchmo.html">Satchmo</a><span>/</span>Segmentos<span>/</span>{html.escape(d['title'])}</div>
+<div class="bc"><a href="index.html">Satchmo</a><span>/</span>Segmentos<span>/</span>{html.escape(d['title'])}</div>
 
 <!-- PRODUCTOS DESTACADOS -->
 <section class="sec">
@@ -477,7 +477,7 @@ def render_landing(slug, d):
   <div class="fi">
     <div class="fgr">
       <div><div class="flogo">Satchmo</div><p class="ftag">Proveedor de panificados<br>para gastronomía<br>Buenos Aires, Argentina</p></div>
-      <div><div class="ft">Navegación</div><ul class="flk"><li><a href="satchmo.html#nosotros">Nosotros</a></li><li><a href="productos.html">Catálogo</a></li><li><a href="satchmo.html#como-trabajamos">Proceso</a></li><li><a href="satchmo.html#contacto">Contacto</a></li></ul></div>
+      <div><div class="ft">Navegación</div><ul class="flk"><li><a href="index.html#nosotros">Nosotros</a></li><li><a href="productos.html">Catálogo</a></li><li><a href="index.html#como-trabajamos">Proceso</a></li><li><a href="index.html#contacto">Contacto</a></li></ul></div>
       <div><div class="ft">Segmentos</div><ul class="flk"><li><a href="buffets-cafeterias.html">Buffets y cafeterías</a></li><li><a href="hamburgueserias.html">Hamburgueserías</a></li><li><a href="hoteles.html">Hoteles</a></li><li><a href="catering.html">Catering</a></li></ul></div>
       <div><div class="ft">Contacto</div><ul class="flk"><li><a href="tel:+5491126952459">+54 9 11 2695-2459</a></li><li><a href="mailto:satchmopanificados@gmail.com">satchmopanificados@gmail.com</a></li><li><a href="https://wa.me/5491126952459" target="_blank">WhatsApp</a></li></ul></div>
     </div>
