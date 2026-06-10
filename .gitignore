@@ -1,10 +1,3 @@
-# OS
+__pycache__/
+*.pyc
 .DS_Store
-
-# Original photos (not optimized for web)
-PRODU DE FOTOS*/
-*.zip
-img_backup/
-
-# Source files not needed in repo
-logo_mangini.png
