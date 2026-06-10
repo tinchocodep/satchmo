@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://panificadorasatchmo.com/sitemap.xml
