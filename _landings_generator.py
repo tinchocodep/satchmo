@@ -362,9 +362,27 @@ def _url_encode(s):
     return quote(s)
 
 
+# Títulos y descripciones optimizados para búsqueda (deben coincidir con los HTML publicados)
+SEO_META = {
+    "restaurantes": ("Proveedor de pan para restaurantes — Satchmo | CABA y GBA",
+        "Pan de campo, chapata, figazzas y baguetines soft para restaurantes. Proveedor mayorista de panificados con entrega diaria en CABA y GBA."),
+    "hoteles": ("Proveedor de panificados para hoteles — Satchmo | CABA y GBA",
+        "Croissants, medialunas, lactales y multicereales para desayunos de hotel. Entrega antes de las 7 AM en CABA y GBA. Pedí tu cotización."),
+    "hamburgueserias": ("Pan de hamburguesa por mayor — Satchmo | 12 variantes premium",
+        "Proveedor de pan de hamburguesa premium: clásico, black, green, papa, queso y multicereal. Distribución a hamburgueserías y cervecerías de CABA y GBA."),
+    "buffets-cafeterias": ("Proveedor de facturas y medialunas para cafeterías — Satchmo",
+        "Medialunas, facturas, croissants, budines y cookies por mayor para buffets y cafeterías. Producción diaria y entrega en CABA y GBA."),
+    "catering": ("Panificados por mayor para catering y eventos — Satchmo",
+        "Sándwiches de miga, copetín, surtidos de facturas y masas finas para eventos de 50 a 2.000 personas. Producción dedicada, entrega en fecha."),
+    "canchas-clubes": ("Proveedor de panificados para clubes y buffets deportivos — Satchmo",
+        "Super pancho soft 30 y 60 cm, pan hamburguesa premium y prepizzas por mayor. Packs para el pico de venta de partidos y fines de semana."),
+    "panaderias": ("Panificados congelados y crudos por mayor para panaderías — Satchmo",
+        "Crudo por lata (medialunas, vigilantes, sacramentos, scones), congelados y pre-cocidos por mayor. Toda nuestra planta al servicio de tu mostrador."),
+}
+
+
 def render_landing(slug, d):
-    page_title = f"{d['title']} — Satchmo Panificados"
-    meta_desc = d["hero_sub"]
+    page_title, meta_desc = SEO_META.get(slug, (f"{d['title']} — Satchmo Panificados", d["hero_sub"]))
     products_html = "\n".join(render_product_card(n, c, cs) for n, c, cs in d["productos"])
     steps_html = ""
     for i, (t, p) in enumerate(d["caso_steps"], start=1):
@@ -389,7 +407,7 @@ def render_landing(slug, d):
 <meta property="og:title" content="{html.escape(page_title)}">
 <meta property="og:description" content="{html.escape(meta_desc)}">
 <meta property="og:url" content="https://panificadorasatchmo.com/{slug}.html">
-<meta property="og:image" content="https://panificadorasatchmo.com/img/logo.png">
+<meta property="og:image" content="https://panificadorasatchmo.com/img/og-image.jpg">
 <meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
