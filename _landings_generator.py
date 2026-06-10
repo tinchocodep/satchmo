@@ -382,6 +382,15 @@ def render_landing(slug, d):
 <meta name="description" content="{html.escape(meta_desc)}">
 <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
+<link rel="canonical" href="https://satchmo.vercel.app/{slug}.html">
+<meta property="og:site_name" content="Satchmo">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_AR">
+<meta property="og:title" content="{html.escape(page_title)}">
+<meta property="og:description" content="{html.escape(meta_desc)}">
+<meta property="og:url" content="https://satchmo.vercel.app/{slug}.html">
+<meta property="og:image" content="https://satchmo.vercel.app/img/logo.png">
+<meta name="twitter:card" content="summary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
